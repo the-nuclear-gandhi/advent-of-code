@@ -1,10 +1,11 @@
 package year15
 
-class Year15Day1 {
+import shared.Day
 
-  internal fun part1(s: String): Int {
-    return s.count { it == '(' } - s.count { it == ')' }
-  }
+class Year15Day1 : Day {
+
+  internal fun part1(s: String): Int =
+    s.count { it == '(' } - s.count { it == ')' }
 
   internal fun part2(s: String): Int {
     var count = 0
@@ -21,14 +22,10 @@ class Year15Day1 {
     return -1
   }
 
-  fun solve() {
+  override fun solve() {
     val input = javaClass.classLoader.getResource("year15/day1.txt")!!.readText()
 
     println(part1(input))
     println(part2(input))
   }
-}
-
-fun main(args: Array<String>) {
-  Year15Day1().solve()
 }
