@@ -52,5 +52,6 @@ class Year15Day1Test {
     fun `should return 5`(s: String) {
       assertEquals(5, year15Day1.part2(s))
     }
+
   }
 }

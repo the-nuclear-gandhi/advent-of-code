@@ -22,6 +22,7 @@ class Year15Day2Test {
     fun `should return 43`() {
       assertEquals(43, year15Day2.part1(listOf("1x1x10")))
     }
+
   }
 
   @Nested
@@ -36,5 +37,6 @@ class Year15Day2Test {
     fun `should return 14`() {
       assertEquals(14, year15Day2.part2(listOf("1x1x10")))
     }
+
   }
 }
