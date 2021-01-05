@@ -37,7 +37,7 @@ class Year15Day3 : Day<String>() {
     return visitedPoints.size
   }
 
-  private fun nextPoint(point: Point, direction: Char) = when (direction) {
+  private fun nextPoint(point: Point, direction: Char): Point = when (direction) {
     '>' -> Point(point.x + 1, point.y)
     'v' -> Point(point.x, point.y - 1)
     '<' -> Point(point.x - 1, point.y)
