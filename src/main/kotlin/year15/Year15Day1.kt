@@ -2,30 +2,26 @@ package year15
 
 import shared.Day
 
-class Year15Day1 : Day {
+class Year15Day1 : Day<String>() {
 
-  internal fun part1(s: String): Int =
-    s.count { it == '(' } - s.count { it == ')' }
+  override fun getInput(): String = inputResource()
 
-  internal fun part2(s: String): Int {
+  override fun part1(input: String): Int =
+    input.count { it == '(' } - input.count { it == ')' }
+
+  override fun part2(input: String): Int {
     var count = 0
-    for (i in s.indices) {
-      when (s[i]) {
+    for (i in input.indices) {
+      when (input[i]) {
         '(' -> count++
         ')' -> count--
       }
 
       if (count < 0) {
-        return i+1
+        return i + 1
       }
     }
     return -1
   }
 
-  override fun solve() {
-    val input = javaClass.classLoader.getResource("year15/day1.txt")!!.readText()
-
-    println(part1(input))
-    println(part2(input))
-  }
 }
