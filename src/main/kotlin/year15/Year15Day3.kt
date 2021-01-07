@@ -5,7 +5,7 @@ import shared.Point
 
 class Year15Day3 : Day<String>() {
 
-  override fun getInput(): String = inputResource()
+  override fun getInput(): String = inputResource().asString()
 
   override fun part1(input: String): Int {
     var santaLocation = Point(0, 0)

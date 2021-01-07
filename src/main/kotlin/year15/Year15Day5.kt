@@ -4,8 +4,7 @@ import shared.Day
 
 class Year15Day5 : Day<List<String>>() {
 
-  override fun getInput(): List<String> = inputResource()
-    .lines()
+  override fun getInput(): List<String> = inputResource().asLines()
     .filterNot { it.isEmpty() }
 
   override fun part1(input: List<String>): Int = input
