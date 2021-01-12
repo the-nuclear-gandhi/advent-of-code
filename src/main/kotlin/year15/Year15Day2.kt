@@ -5,7 +5,6 @@ import shared.Day
 class Year15Day2 : Day<List<String>>() {
 
   override fun getInput(): List<String> = inputResource().asLines()
-    .filterNot { it.isEmpty() }
 
   override fun part1(input: List<String>): Long =
     input.map { it.split("x").map { token -> token.toLong() } }
