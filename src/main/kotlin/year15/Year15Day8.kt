@@ -1,0 +1,30 @@
+package year15
+
+import shared.Day
+
+class Year15Day8 : Day<List<String>>() {
+
+  override fun getInput(): List<String> = inputResource().asLines()
+
+  override fun part1(input: List<String>): Int =
+    input.map {
+      it.length -
+        it.slice(1 until it.length-1)
+          .replace("\\\\", "a")
+          .replace("\\\"", "a")
+          .replace(Regex("\\\\x[a-z0-9]{2}"), "a")
+          .length
+    }
+      .sum()
+
+  override fun part2(input: List<String>): Int =
+    input.map {
+      val transformedValue = it.replace("\"", "aa")
+        .replace("\\", "aa")
+        .replace(Regex("\\\\x[a-z0-9]{2}"), "aaaaa")
+
+      "\"$transformedValue\"".length - it.length
+    }
+      .sum()
+
+}
