@@ -19,11 +19,9 @@ class Year15Day8 : Day<List<String>>() {
 
   override fun part2(input: List<String>): Int =
     input.map {
-      val transformedValue = it.replace("\"", "aa")
+      it.replace("\"", "aa")
         .replace("\\", "aa")
-        .replace(Regex("\\\\x[a-z0-9]{2}"), "aaaaa")
-
-      "\"$transformedValue\"".length - it.length
+        .length - it.length + 2
     }
       .sum()
 
