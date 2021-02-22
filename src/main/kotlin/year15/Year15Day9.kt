@@ -39,7 +39,7 @@ class Year15Day9 : Day<List<String>>() {
 
       /*
         Each loop increases the visited vertex set length by one
-        For each such length all combinations of visited vertex indices will be generated and distances to these vertex
+        For each such length all combinations of visited vertices will be generated and distances to these vertex
         sets will be calculated and put into the solution map to be used in the next steps
       */
       (2 until locationCount).forEach { length ->
@@ -54,7 +54,7 @@ class Year15Day9 : Day<List<String>>() {
             - consider the previously visited set to be the value of the combination excluding the selected item
             - consider each vertex in the remaining set as the second to last vertex before reaching the selected one
             - for each second to last vertex calculate the distance to the current vertex:
-                solutionMap[(previousSet, secondToLastVertex) + distance[secondToLastVertex][selectedItem]]
+                solutionMap[(previousSet, secondToLastVertex)] + distance[secondToLastVertex][selectedItem]
             - the solution of this sub-problem is then taken based on the provided criterion
            */
           combination.forEach { item ->
@@ -86,8 +86,7 @@ class Year15Day9 : Day<List<String>>() {
   }
 
   private fun locations(input: List<String>): MutableList<String> = input.map {
-      val tokens = it.split(" ")
-      listOf(tokens[0], tokens[2])
+      it.split(" ").let { tokens -> listOf(tokens[0], tokens[2]) }
     }
       .flatten()
       .distinct()
@@ -101,17 +100,20 @@ class Year15Day9 : Day<List<String>>() {
     val size = locations.size
 
     val distances = Array(size) { IntArray(size) }
-    input.forEach {
+    input.map {
       val origin = it.substringBefore("to").trim()
       val destination = it.substringAfter("to").substringBefore("=").trim()
-      val distance = it.substringAfter("=").trim().toInt()
+      val distance = it.substringAfter("=").trim()
 
-      val indexOfOrigin = locationsWithStartingLocation.indexOf(origin)
-      val indexOfDestination = locationsWithStartingLocation.indexOf(destination)
-
-      distances[indexOfOrigin][indexOfDestination] = distance
-      distances[indexOfDestination][indexOfOrigin] = distance
+      listOf(origin, destination, distance)
     }
+      .forEach { (origin, destination, distance) ->
+        val indexOfOrigin = locationsWithStartingLocation.indexOf(origin)
+        val indexOfDestination = locationsWithStartingLocation.indexOf(destination)
+
+        distances[indexOfOrigin][indexOfDestination] = distance.toInt()
+        distances[indexOfDestination][indexOfOrigin] = distance.toInt()
+      }
 
     return distances
   }
