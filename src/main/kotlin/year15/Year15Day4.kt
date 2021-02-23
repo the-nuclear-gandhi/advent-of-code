@@ -6,7 +6,7 @@ import kotlin.text.Charsets.UTF_8
 
 class Year15Day4 : Day<String>() {
 
-  override fun getInput(): String = inputResource().asLines()[0]
+  override fun getInput(): String = inputResource().asString().trim()
   override fun part1(input: String): Long = findHexByPrefix(input, "00000")
   override fun part2(input: String): Long = findHexByPrefix(input, "000000")
 
