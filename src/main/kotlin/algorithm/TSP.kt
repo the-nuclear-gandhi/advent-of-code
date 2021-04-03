@@ -97,9 +97,9 @@ fun solveTSP(
     }
 
     /*
-      From the resulting solution map take all the entries with keys corresponding to all visited vertices (including
-      or excluding the starting vertex according to the provided condition) and return the value according to the
-      criterion (min or max)
+      From the resulting solution map take all the entries with keys corresponding to all visited vertices including
+      or excluding the starting vertex according to the provided condition and return the value according to the
+      provided criterion
     */
     solutionMap.filterKeys { it.first == resultVisitedSet }.values.let(criterion)
   }
