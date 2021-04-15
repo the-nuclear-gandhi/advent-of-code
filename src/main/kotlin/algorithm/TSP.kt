@@ -32,10 +32,9 @@ fun solveTSP(
       Initially only one vertex can be visited, so the initial distances are initialized with the distance from vertex 0
       to each respective vertex
     */
-    val solutionMap = allPointsExceptStartingRange.map {
+    val solutionMap = allPointsExceptStartingRange.associate {
       Pair(setOf(it), it) to distances[0][it]
     }
-      .toMap()
       .toMutableMap()
 
     /*

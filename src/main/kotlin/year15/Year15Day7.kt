@@ -6,11 +6,10 @@ class Year15Day7 : Day<List<String>>() {
 
   override fun getInput(): List<String> = inputResource().asLines()
 
-  override fun part1(input: List<String>): Int = input.map {
+  override fun part1(input: List<String>): Int = input.associate {
     val tokens = it.split(" -> ")
     tokens[1] to tokens[0]
   }
-    .toMap()
     .toMutableMap()
     .let { getWireValue(it, "a") }
 

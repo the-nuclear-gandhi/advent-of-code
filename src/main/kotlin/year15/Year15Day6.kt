@@ -15,8 +15,7 @@ class Year15Day6 : Day<List<String>>() {
   override fun part2(input: List<String>): Long =
     calculate(input, Array(1000) { Array(1000) { 0 } }, ::transformPart2)
       .flatten()
-      .map { it.toLong() }
-      .sum()
+      .sumOf { it.toLong() }
 
   private fun <T> calculate(input: List<String>, map: Array<Array<T>>, transform: (String, T) -> T): Array<Array<T>> {
     input.forEach {
