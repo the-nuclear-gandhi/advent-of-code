@@ -3,6 +3,7 @@ package year15
 import shared.Day
 
 class Year15Day12 : Day<String>() {
+
   override fun getInput(): String = inputResource().asString()
 
   override fun part1(input: String): Int = input.split(Regex("[^0-9\\-]"))

@@ -3,6 +3,7 @@ package year15
 import shared.Day
 
 class Year15Day10: Day<String>() {
+
   override fun getInput(): String = inputResource().asString().trim()
 
   override fun part1(input: String): Int = lookAndSay(input, 40)

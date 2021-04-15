@@ -4,6 +4,7 @@ import algorithm.solveTSP
 import shared.Day
 
 class Year15Day13 : Day<List<String>>() {
+
   override fun getInput(): List<String> = inputResource().asLines()
 
   override fun part1(input: List<String>): Int = solveTSP(distanceMap(input), true, this::criterion)
