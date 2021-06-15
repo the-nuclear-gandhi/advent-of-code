@@ -8,7 +8,7 @@ class Year15Day10: Day<String>() {
 
   override fun part1(input: String): Int = lookAndSay(input, 40)
 
-  override fun part2(input: String): Any = lookAndSay(input, 50)
+  override fun part2(input: String): Int = lookAndSay(input, 50)
 
   internal fun lookAndSay(startingString: String, times: Int) : Int {
     var digits = startingString.map { it.toString().toInt() }.toList()

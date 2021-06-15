@@ -5,7 +5,7 @@ import shared.Day
 class Year15Day14 : Day<List<String>>() {
   data class Deer(val speed: Int, val flyingTime: Int, val restingTime: Int)
 
-  override fun getInput() = inputResource().asLines()
+  override fun getInput(): List<String> = inputResource().asLines()
 
   override fun part1(input: List<String>): Int = solvePart1(input, 2503)
 

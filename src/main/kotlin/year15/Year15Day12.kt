@@ -10,7 +10,7 @@ class Year15Day12 : Day<String>() {
     .mapNotNull { it.toIntOrNull() }
     .sum()
 
-  override fun part2(input: String): Any {
+  override fun part2(input: String): Int {
     val pattern = ":\"red\""
     var sanitizedInput = input
 
