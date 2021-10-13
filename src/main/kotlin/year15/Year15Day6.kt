@@ -9,8 +9,7 @@ class Year15Day6 : Day<List<String>>() {
     override fun part1(input: List<String>): Int =
         calculate(input, Array(1000) { Array(1000) { false } }, ::transformPart1)
             .flatten()
-            .filter { it }
-            .count()
+            .count { it }
 
     override fun part2(input: List<String>): Long =
         calculate(input, Array(1000) { Array(1000) { 0 } }, ::transformPart2)
