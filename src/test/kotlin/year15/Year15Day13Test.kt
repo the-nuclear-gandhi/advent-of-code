@@ -1,6 +1,6 @@
 package year15
 
-import org.junit.jupiter.api.Assertions
+import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
 
@@ -27,7 +27,7 @@ class Year15Day13Test {
 
         @Test
         fun `should return 330`() {
-            Assertions.assertEquals(330, year15Day13.part1(input))
+            assertEquals(330, year15Day13.part1(input))
         }
     }
 
@@ -35,7 +35,7 @@ class Year15Day13Test {
     inner class TestPart2 {
         @Test
         fun `should return 982`() {
-            Assertions.assertEquals(286, year15Day13.part2(input))
+            assertEquals(286, year15Day13.part2(input))
         }
     }
 }
