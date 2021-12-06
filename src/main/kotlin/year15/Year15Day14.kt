@@ -3,7 +3,7 @@ package year15
 import shared.Day
 
 class Year15Day14 : Day<List<String>>() {
-    data class Deer(val speed: Int, val flyingTime: Int, val restingTime: Int)
+    private data class Deer(val speed: Int, val flyingTime: Int, val restingTime: Int)
 
     override fun getInput(): List<String> = inputResource().asLines()
 
