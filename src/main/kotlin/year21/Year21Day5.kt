@@ -51,7 +51,7 @@ class Year21Day5 : Day<List<String>>() {
             return points
         }
 
-        fun isHorizontal() = start.x == end.x
-        fun isVertical() = start.y == end.y
+        fun isVertical() = start.x == end.x
+        fun isHorizontal() = start.y == end.y
     }
 }
