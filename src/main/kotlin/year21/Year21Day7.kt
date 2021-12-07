@@ -19,7 +19,7 @@ class Year21Day7 : Day<String>() {
 
     override fun part2(input: String): Int = inputToSortedList(input).let {
         (0..it.maxOf { n -> n }).minOf { i ->
-            it.sumOf { n -> (0..abs(n - i)).sum() }
+            it.sumOf { n -> abs(n - i) * (abs(n - i) + 1) / 2 }
         }
     }
 
