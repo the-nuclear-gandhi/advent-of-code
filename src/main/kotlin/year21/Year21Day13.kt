@@ -10,7 +10,7 @@ class Year21Day13 : Day<List<String>>() {
         foldByInstruction(points, instructions.first()).size
     }
 
-    override fun part2(input: List<String>): Any = parseInput(input).let { (points, instructions) ->
+    override fun part2(input: List<String>): Unit = parseInput(input).let { (points, instructions) ->
         val newPoints =
             instructions.fold(points) { acc, instruction -> foldByInstruction(acc, instruction) }
 

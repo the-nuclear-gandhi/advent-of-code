@@ -5,8 +5,8 @@ abstract class Day<INPUT> {
     fun solve() {
         val input = getInput()
 
-        println(part1(input))
-        println(part2(input))
+        printResult(part1(input))
+        printResult(part2(input))
     }
 
     internal abstract fun getInput(): INPUT
@@ -20,4 +20,9 @@ abstract class Day<INPUT> {
         return InputResource.forName("year$year/day$day.txt")
     }
 
+    private fun printResult(output: Any): Unit = output.let {
+        if (it !is Unit) {
+            println(it)
+        }
+    }
 }
