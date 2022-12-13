@@ -4,3 +4,4 @@ out
 
 .gradle
 build
+src/main/resources/*
