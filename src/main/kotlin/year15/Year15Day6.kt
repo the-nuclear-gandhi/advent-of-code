@@ -51,6 +51,7 @@ class Year15Day6 : Day<List<String>>() {
         } else {
             item
         }
+
         else -> item
     }
 

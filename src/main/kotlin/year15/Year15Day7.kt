@@ -16,23 +16,25 @@ class Year15Day7 : Day<List<String>>() {
     private fun getWireValue(map: MutableMap<String, String>, wireCode: String): Int {
         val value = map[wireCode]!!
 
-        val result = value.toIntOrNull() ?: ( run {
+        val result = value.toIntOrNull() ?: (run {
             val tokens = value.split(" ")
             when {
                 value.contains("AND") -> (tokens.first().toIntOrNull() ?: getWireValue(
                     map,
                     tokens.first()
                 )) and getWireValue(map, tokens.last())
+
                 value.contains("OR") -> (tokens.first().toIntOrNull() ?: getWireValue(
                     map,
                     tokens.first()
                 )) or getWireValue(map, tokens.last())
+
                 value.contains("LSHIFT") -> getWireValue(map, tokens.first()) shl tokens.last().toInt()
                 value.contains("RSHIFT") -> getWireValue(map, tokens.first()) shr tokens.last().toInt()
                 value.contains("NOT") -> getWireValue(map, tokens.last()).inv()
                 else -> getWireValue(map, tokens.first())
             }
-        } and 65535 )
+        } and 65535)
 
         map[wireCode] = result.toString()
 

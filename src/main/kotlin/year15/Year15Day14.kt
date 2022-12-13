@@ -12,8 +12,7 @@ class Year15Day14 : Day<List<String>>() {
     override fun part2(input: List<String>): Int = solvePart2(input, 2503)
 
     internal fun solvePart1(input: List<String>, time: Int): Int =
-        inputToDeerList(input)
-            .maxOf { deer -> distanceAtTime(time, deer) }
+        inputToDeerList(input).maxOf { deer -> distanceAtTime(time, deer) }
 
     internal fun solvePart2(input: List<String>, time: Int): Int {
         val deerList = inputToDeerList(input)

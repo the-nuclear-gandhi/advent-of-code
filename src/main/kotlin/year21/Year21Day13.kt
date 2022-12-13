@@ -44,16 +44,16 @@ class Year21Day13 : Day<List<String>>() {
     }
 
     private fun foldByInstruction(points: Set<Point>, instruction: Instruction): MutableSet<Point> {
-        val targetCoordinate: (Point) -> Int = if (instruction.type == "x") {
-            point -> point.x
-        } else {
-            point -> point.y
+        val targetCoordinate: (Point) -> Int = if (instruction.type == "x") { point ->
+            point.x
+        } else { point ->
+            point.y
         }
 
-        val pointProducer: (Int, Point) -> Point = if (instruction.type == "x") {
-            n, point -> Point(n, point.y)
-        } else {
-            n, point -> Point(point.x, n)
+        val pointProducer: (Int, Point) -> Point = if (instruction.type == "x") { n, point ->
+            Point(n, point.y)
+        } else { n, point ->
+            Point(point.x, n)
         }
 
         val max = points.maxOf { targetCoordinate(it) }
