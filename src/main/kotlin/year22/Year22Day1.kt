@@ -11,7 +11,7 @@ class Year22Day1 : Day<String>() {
         input.split("\n\n")
             .map { sumOfLines(it) }
             .sortedDescending()
-            .slice(0..2)
+            .take(3)
             .sum()
 
     private fun sumOfLines(s: String): Int = s.lines().sumOf { it.toIntOrNull() ?: 0 }
