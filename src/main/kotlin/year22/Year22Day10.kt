@@ -36,7 +36,7 @@ class Year22Day10 : Day<List<String>>() {
                 x += command.substringAfter(" ").toInt()
             }
 
-            else -> {}
+            else -> println("Unsupported command: $command")
         }
 
         private fun runCycle() {
