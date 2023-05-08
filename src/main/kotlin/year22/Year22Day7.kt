@@ -49,7 +49,7 @@ class Year22Day7 : Day<List<String>>() {
                 }
 
                 else -> currentNode?.let {
-                    it.size += Integer.parseInt(tokens[0])
+                    it.size += tokens[0].toInt()
                 }
             }
         }

@@ -2,17 +2,16 @@ package year22
 
 import shared.Day
 
-class Year22Day1 : Day<String>() {
-    override fun getInput(): String = inputResource().asString()
+class Year22Day1 : Day<List<List<String>>>() {
+    override fun getInput(): List<List<String>> = inputResource().asLineBlocks()
 
-    override fun part1(input: String): Int = input.split("\n\n").maxOf { sumOfLines(it) }
+    override fun part1(input: List<List<String>>): Int = input.maxOf { sumOfLines(it) }
 
-    override fun part2(input: String): Int =
-        input.split("\n\n")
-            .map { sumOfLines(it) }
+    override fun part2(input: List<List<String>>): Int =
+        input.map { sumOfLines(it) }
             .sortedDescending()
             .take(3)
             .sum()
 
-    private fun sumOfLines(s: String): Int = s.lines().sumOf { it.toIntOrNull() ?: 0 }
+    private fun sumOfLines(list: List<String>): Int = list.sumOf { it.toIntOrNull() ?: 0 }
 }

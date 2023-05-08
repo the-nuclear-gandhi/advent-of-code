@@ -15,4 +15,5 @@ class InputResource private constructor(private val resource: URL) {
 
     fun asString(): String = resource.readText()
     fun asLines(): List<String> = asString().lines().filter { it.isNotEmpty() }
+    fun asLineBlocks(): List<List<String>> = asString().toLineBlocks()
 }

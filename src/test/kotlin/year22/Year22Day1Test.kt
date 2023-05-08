@@ -3,11 +3,27 @@ package year22
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
+import shared.toLineBlocks
 
 class Year22Day1Test {
 
     val year22Day1 = Year22Day1()
-    val input = "1000\n2000\n3000\n\n4000\n\n5000\n6000\n\n7000\n8000\n9000\n\n10000"
+    val input = """
+        1000
+        2000
+        3000
+        
+        4000
+        
+        5000
+        6000
+        
+        7000
+        8000
+        9000
+        
+        10000
+    """.trimIndent().toLineBlocks()
 
     @Nested
     inner class TestPart1 {

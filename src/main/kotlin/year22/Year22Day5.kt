@@ -2,26 +2,22 @@ package year22
 
 import shared.Day
 
-class Year22Day5 : Day<String>() {
-    override fun getInput(): String = inputResource().asString()
+class Year22Day5 : Day<List<List<String>>>() {
+    override fun getInput(): List<List<String>> = inputResource().asLineBlocks()
 
-    override fun part1(input: String): String = input.split("\n\n")
-        .map { it.lines() }
-        .let { (initialState, instructions) ->
-            simulate(parseInitialState(initialState), instructions) { it.reversed() }
-        }
+    override fun part1(input: List<List<String>>): String = input.let { (initialState, instructions) ->
+        simulate(parseInitialState(initialState), instructions) { it.reversed() }
+    }
 
-    override fun part2(input: String): String = input.split("\n\n")
-        .map { it.lines() }
-        .let { (initialState, instructions) ->
-            simulate(parseInitialState(initialState), instructions) { it }
-        }
+    override fun part2(input: List<List<String>>): String = input.let { (initialState, instructions) ->
+        simulate(parseInitialState(initialState), instructions) { it }
+    }
 
     private fun parseInitialState(containerInput: List<String>): MutableList<MutableList<Char>> {
         val size = containerInput.last()
             .toCharArray()
             .filter { it.isDigit() }
-            .maxOf { Integer.parseInt(it.toString()) }
+            .maxOf { it.toString().toInt() }
         val state = MutableList(size) { mutableListOf<Char>() }
 
         containerInput.dropLast(1)
