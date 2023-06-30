@@ -24,7 +24,7 @@ class Year21Day9 : Day<List<String>>() {
     }
 
     private fun findLowPoints(valuePoints: List<ValuePoint>): List<ValuePoint> = valuePoints.filter {
-        it.neighbours()
+        it.point.neighbours()
             .mapNotNull { point -> valuePoints.findByPoint(point) }
             .all { valuePoint -> valuePoint > it }
     }
@@ -34,7 +34,7 @@ class Year21Day9 : Day<List<String>>() {
         val visitedPoints = mutableSetOf<Point>()
         while (pointsToVisit.isNotEmpty()) {
             val visiting = pointsToVisit.removeFirst()
-            visiting.neighbours()
+            visiting.point.neighbours()
                 .filter { it !in visitedPoints }
                 .mapNotNull { valuePoints.findByPoint(it) }
                 .filter { it.value < 9 }
@@ -48,12 +48,6 @@ class Year21Day9 : Day<List<String>>() {
 
     private data class ValuePoint(val point: Point, val value: Int) {
         operator fun compareTo(other: ValuePoint): Int = value - other.value
-
-        fun neighbours(): List<Point> = (point.x - 1..point.x + 1).flatMap { dx ->
-            (point.y - 1..point.y + 1).mapNotNull { dy ->
-                Point(dx, dy).takeIf { dx == point.x || dy == point.y }.takeUnless { it == point }
-            }
-        }
     }
 
     private fun List<ValuePoint>.findByPoint(point: Point): ValuePoint? = this.firstOrNull { it.point == point }
