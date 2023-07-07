@@ -1,11 +1,22 @@
 package shared
 
+import org.slf4j.LoggerFactory
+
 abstract class Day<INPUT> {
+    private val log by lazy {
+        LoggerFactory.getLogger(javaClass.simpleName)
+    }
+
+    private companion object Messages {
+        private const val solving = "Solving Part {}"
+    }
 
     fun solve() {
         val input = getInput()
 
+        log.info(solving, 1)
         printResult(part1(input))
+        log.info(solving, 2)
         printResult(part2(input))
     }
 
@@ -22,7 +33,7 @@ abstract class Day<INPUT> {
 
     private fun printResult(output: Any): Unit = output.let {
         if (it !is Unit) {
-            println(it)
+            log.info(it.toString())
         }
     }
 }
