@@ -19,23 +19,17 @@ class Year15Day16 : Day<List<String>>() {
     override fun getInput(): List<String> = inputResource().asLines()
 
     override fun part1(input: List<String>): Int = findAuntSue(input) { key, map ->
-        if (map.containsKey(key)) {
-            map[key] == targetAuntSue[key]
-        } else {
-            true
-        }
+        map[key]?.let { it == targetAuntSue[key] } ?: true
     }
 
     override fun part2(input: List<String>): Int = findAuntSue(input) { key, map ->
-        if (map.containsKey(key)) {
+        map[key]?.let {
             when (key) {
-                "cats", "trees" -> map[key]!! > targetAuntSue[key]!!
-                "pomeranians", "goldfish" -> map[key]!! < targetAuntSue[key]!!
-                else -> map[key] == targetAuntSue[key]
+                "cats", "trees" -> it > targetAuntSue[key]!!
+                "pomeranians", "goldfish" -> it < targetAuntSue[key]!!
+                else -> it == targetAuntSue[key]
             }
-        } else {
-            true
-        }
+        } ?: true
     }
 
     private fun findAuntSue(input: List<String>, mappingFunction: (String, Map<String, Int>) -> Boolean) =
