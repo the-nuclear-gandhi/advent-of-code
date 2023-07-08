@@ -8,15 +8,15 @@ abstract class Day<INPUT> {
     }
 
     private companion object Messages {
-        private const val solving = "Solving Part {}"
+        private const val answer = "Answer for Part {}:"
     }
 
     fun solve() {
         val input = getInput()
 
-        log.info(solving, 1)
+        log.info(answer, 1)
         printResult(part1(input))
-        log.info(solving, 2)
+        log.info(answer, 2)
         printResult(part2(input))
     }
 
