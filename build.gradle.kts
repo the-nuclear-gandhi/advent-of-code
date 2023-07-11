@@ -1,5 +1,6 @@
 plugins {
     kotlin("jvm") version "1.9.0"
+    id("org.sonarqube") version "4.2.1.3168"
     jacoco
 }
 
@@ -15,6 +16,14 @@ dependencies {
 
     testImplementation(platform("org.junit:junit-bom:5.9.3"))
     testImplementation("org.junit.jupiter:junit-jupiter")
+}
+
+sonar {
+    properties {
+        property("sonar.projectKey", "the-nuclear-gandhi_advent-of-code")
+        property("sonar.organization", "the-nuclear-gandhi")
+        property("sonar.host.url", "https://sonarcloud.io")
+    }
 }
 
 tasks.test {
