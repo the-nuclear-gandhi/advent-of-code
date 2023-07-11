@@ -14,7 +14,9 @@ class Year22Day7 : Day<List<String>>() {
 
     override fun part2(input: List<String>): Int = parseFileSystem(input)
         .let { nodeMap ->
-            val requiredSize = 30_000_000 - (70_000_000 - nodeSize(nodeMap["/"]!!, nodeMap))
+            val requiredSize = nodeMap["/"]?.let {
+                30_000_000 - (70_000_000 - nodeSize(it, nodeMap))
+            } ?: throw RuntimeException("No value for root node present in the node map")
 
             nodeMap.map { nodeSize(it.value, nodeMap) }
                 .filter { it > requiredSize }
