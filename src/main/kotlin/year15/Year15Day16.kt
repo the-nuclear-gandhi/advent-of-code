@@ -25,8 +25,8 @@ class Year15Day16 : Day<List<String>>() {
     override fun part2(input: List<String>): Int = findAuntSue(input) { key, map ->
         map[key]?.let {
             when (key) {
-                "cats", "trees" -> it > targetAuntSue[key]!!
-                "pomeranians", "goldfish" -> it < targetAuntSue[key]!!
+                "cats", "trees" -> it > targetAuntSue.getValue(key)
+                "pomeranians", "goldfish" -> it < targetAuntSue.getValue(key)
                 else -> it == targetAuntSue[key]
             }
         } ?: true
