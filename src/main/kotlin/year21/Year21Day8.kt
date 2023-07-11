@@ -26,30 +26,30 @@ class Year21Day8 : Day<List<String>>() {
 
                 patterns.filter { it.length == 6 }
                     .map { it.toSet() }
-                    .forEach {
-                        val index = when {
-                            it.containsAll(segments[7]!!) && it.containsAll(segments[4]!!) -> 9
-                            !it.containsAll(segments[1]!!) -> 6
+                    .associateBy {
+                        when {
+                            it.containsAll(segments.getValue(7)) && it.containsAll(segments.getValue(4)) -> 9
+                            !it.containsAll(segments.getValue(1)) -> 6
                             else -> 0
                         }
-                        segments[index] = it
                     }
+                    .let { segments.putAll(it) }
 
                 patterns.filter { it.length == 5 }
                     .map { it.toSet() }
-                    .forEach {
-                        val index = when {
-                            it.containsAll(segments[7]!!) -> 3
-                            segments[6]!!.containsAll(it) -> 5
+                    .associateBy {
+                        when {
+                            it.containsAll(segments.getValue(7)) -> 3
+                            segments.getValue(6).containsAll(it) -> 5
                             else -> 2
                         }
-                        segments[index] = it
                     }
+                    .let { segments.putAll(it) }
 
                 numbers.map {
                     segments.filter { segment -> segment.value.size == it.length }
                         .keys
-                        .first { key -> it.toSet().containsAll(segments[key]!!) }
+                        .first { key -> segments[key]?.let { segment -> it.toSet().containsAll(segment) } ?: false }
                 }
                     .joinToString("")
                     .toLong()
