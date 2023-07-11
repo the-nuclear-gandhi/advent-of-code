@@ -35,7 +35,7 @@ class Year21Day14 : Day<List<String>>() {
             .associateWith { counts.filterKeys { key -> key.startsWith(it) }.values.sum() }
             .toMutableMap()
             .apply {
-                this[template.last()] = this[template.last()]!! + 1
+                this.computeIfPresent(template.last()) { _, v -> v + 1 }
             }
 
         return letterCounts.maxOf { it.value } - letterCounts.minOf { it.value }
