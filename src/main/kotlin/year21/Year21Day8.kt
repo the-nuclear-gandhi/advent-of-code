@@ -47,9 +47,7 @@ class Year21Day8 : Day<List<String>>() {
                     .let { segments.putAll(it) }
 
                 numbers.map {
-                    segments.filter { segment ->
-                        segment.value.size == it.length && it.toSet().containsAll(segment.value)
-                    }
+                    segments.filter { segment -> it.toSet() == segment.value }
                         .keys
                         .first()
                 }
