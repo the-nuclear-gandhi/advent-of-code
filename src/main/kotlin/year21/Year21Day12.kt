@@ -1,9 +1,9 @@
 package year21
 
 import shared.Day
+import shared.InputConverter.Companion.toLines
 
-class Year21Day12 : Day<List<String>>() {
-    override fun getInput(): List<String> = inputResource().asLines()
+class Year21Day12 : Day<List<String>>(::toLines) {
 
     override fun part1(input: List<String>): Int =
         countPaths("start", parseInput(input), listOf()) { nextCave, visited ->

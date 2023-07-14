@@ -1,9 +1,9 @@
 package year21
 
 import shared.Day
+import shared.InputConverter.Companion.noOp
 
-class Year21Day4 : Day<String>() {
-    override fun getInput(): String = inputResource().asString()
+class Year21Day4 : Day<String>(::noOp) {
 
     override fun part1(input: String): Long = parseInput(input).gameStateAtFirstWinner().let {
         calculateResult(it.first, it.second)

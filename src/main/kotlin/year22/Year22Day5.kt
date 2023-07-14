@@ -1,15 +1,16 @@
 package year22
 
 import shared.Day
+import shared.InputConverter.Companion.toLineBlocks
+import shared.LineBlock
 
-class Year22Day5 : Day<List<List<String>>>() {
-    override fun getInput(): List<List<String>> = inputResource().asLineBlocks()
+class Year22Day5 : Day<List<LineBlock>>(::toLineBlocks) {
 
-    override fun part1(input: List<List<String>>): String = input.let { (initialState, instructions) ->
+    override fun part1(input: List<LineBlock>): String = input.let { (initialState, instructions) ->
         simulate(parseInitialState(initialState), instructions) { it.reversed() }
     }
 
-    override fun part2(input: List<List<String>>): String = input.let { (initialState, instructions) ->
+    override fun part2(input: List<LineBlock>): String = input.let { (initialState, instructions) ->
         simulate(parseInitialState(initialState), instructions) { it }
     }
 

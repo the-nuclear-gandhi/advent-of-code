@@ -1,10 +1,10 @@
 package year21
 
 import shared.Day
+import shared.InputConverter.Companion.toLines
 import kotlin.streams.toList
 
-class Year21Day14 : Day<List<String>>() {
-    override fun getInput(): List<String> = inputResource().asLines()
+class Year21Day14 : Day<List<String>>(::toLines) {
 
     override fun part1(input: List<String>): Long = calculatePolymer(input, 10)
 

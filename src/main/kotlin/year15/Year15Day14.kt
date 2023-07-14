@@ -1,11 +1,11 @@
 package year15
 
 import shared.Day
+import shared.InputConverter.Companion.toLines
 
-class Year15Day14 : Day<List<String>>() {
+class Year15Day14 : Day<List<String>>(::toLines) {
+
     private data class Deer(val speed: Int, val flyingTime: Int, val restingTime: Int)
-
-    override fun getInput(): List<String> = inputResource().asLines()
 
     override fun part1(input: List<String>): Int = solvePart1(input, 2503)
 

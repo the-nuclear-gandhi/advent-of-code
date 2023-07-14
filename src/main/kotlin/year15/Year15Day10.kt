@@ -1,10 +1,9 @@
 package year15
 
 import shared.Day
+import shared.InputConverter.Companion.trimming
 
-class Year15Day10 : Day<String>() {
-
-    override fun getInput(): String = inputResource().asString().trim()
+class Year15Day10 : Day<String>(::trimming) {
 
     override fun part1(input: String): Int = lookAndSay(input, 40)
 

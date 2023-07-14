@@ -1,8 +1,9 @@
 package year15
 
 import shared.Day
+import shared.InputConverter.Companion.toLines
 
-class Year15Day16 : Day<List<String>>() {
+class Year15Day16 : Day<List<String>>(::toLines) {
     private val targetAuntSue = mapOf(
         "children" to 3,
         "cats" to 7,
@@ -15,8 +16,6 @@ class Year15Day16 : Day<List<String>>() {
         "cars" to 2,
         "perfumes" to 1,
     )
-
-    override fun getInput(): List<String> = inputResource().asLines()
 
     override fun part1(input: List<String>): Int = findAuntSue(input) { key, map ->
         map[key]?.let { it == targetAuntSue[key] } ?: true

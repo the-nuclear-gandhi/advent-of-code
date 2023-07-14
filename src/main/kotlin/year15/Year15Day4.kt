@@ -1,12 +1,12 @@
 package year15
 
 import shared.Day
+import shared.InputConverter.Companion.trimming
 import java.security.MessageDigest
 import kotlin.text.Charsets.UTF_8
 
-class Year15Day4 : Day<String>() {
+class Year15Day4 : Day<String>(::trimming) {
 
-    override fun getInput(): String = inputResource().asString().trim()
     override fun part1(input: String): Long = findHexByPrefix(input, "00000")
     override fun part2(input: String): Long = findHexByPrefix(input, "000000")
 

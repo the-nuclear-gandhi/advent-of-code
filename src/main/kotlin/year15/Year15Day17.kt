@@ -1,11 +1,9 @@
 package year15
 
 import shared.Day
+import shared.InputConverter.Companion.toInts
 
-class Year15Day17 : Day<List<Int>>() {
-    override fun getInput(): List<Int> = inputResource().asLines()
-        .map { it.toInt() }
-        .toList()
+class Year15Day17 : Day<List<Int>>(::toInts) {
 
     override fun part1(input: List<Int>): Int = solvePart1(input, 150)
 

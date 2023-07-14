@@ -1,11 +1,10 @@
 package year15
 
 import shared.Day
+import shared.InputConverter.Companion.noOp
 import shared.Point
 
-class Year15Day3 : Day<String>() {
-
-    override fun getInput(): String = inputResource().asString()
+class Year15Day3 : Day<String>(::noOp) {
 
     override fun part1(input: String): Int {
         var santaLocation = Point(0, 0)

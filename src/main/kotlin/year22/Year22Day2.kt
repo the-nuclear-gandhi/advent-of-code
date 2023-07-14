@@ -1,9 +1,9 @@
 package year22
 
 import shared.Day
+import shared.InputConverter.Companion.toLines
 
-class Year22Day2 : Day<List<String>>() {
-    override fun getInput(): List<String> = inputResource().asLines()
+class Year22Day2 : Day<List<String>>(::toLines) {
 
     override fun part1(input: List<String>): Int = mapOf(
         "A X" to 4, "A Y" to 8, "A Z" to 3,

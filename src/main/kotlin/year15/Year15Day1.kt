@@ -1,10 +1,9 @@
 package year15
 
 import shared.Day
+import shared.InputConverter.Companion.noOp
 
-class Year15Day1 : Day<String>() {
-
-    override fun getInput(): String = inputResource().asString()
+class Year15Day1 : Day<String>(::noOp) {
 
     override fun part1(input: String): Int =
         input.count { it == '(' } - input.count { it == ')' }

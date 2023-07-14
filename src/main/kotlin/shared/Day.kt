@@ -2,34 +2,24 @@ package shared
 
 import org.slf4j.LoggerFactory
 
-abstract class Day<INPUT> {
+abstract class Day<INPUT>(private val inputConverter: (String) -> INPUT) {
     private val log by lazy {
         LoggerFactory.getLogger(javaClass.simpleName)
     }
 
-    private companion object Messages {
+    private companion object {
         private const val answer = "Answer for Part {}:"
     }
 
-    fun solve() {
-        val input = getInput()
-
+    fun solve(input: String) = inputConverter(input).let {
         log.info(answer, 1)
-        printResult(part1(input))
+        printResult(part1(it))
         log.info(answer, 2)
-        printResult(part2(input))
+        printResult(part2(it))
     }
 
-    internal abstract fun getInput(): INPUT
     internal abstract fun part1(input: INPUT): Any
     internal abstract fun part2(input: INPUT): Any
-
-    internal fun inputResource(): InputResource {
-        val year = javaClass.name.substringAfter("Year").substringBefore("Day")
-        val day = javaClass.name.substringAfter("Day")
-
-        return InputResource.forName("year$year/day$day.txt")
-    }
 
     private fun printResult(output: Any): Unit = output.let {
         if (it !is Unit) {

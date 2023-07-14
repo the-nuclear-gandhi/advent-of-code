@@ -1,12 +1,12 @@
 package year21
 
 import shared.Day
+import shared.InputConverter.Companion.toLines
 import shared.Point
 import java.util.function.Predicate
 import kotlin.math.sign
 
-class Year21Day5 : Day<List<String>>() {
-    override fun getInput(): List<String> = inputResource().asLines()
+class Year21Day5 : Day<List<String>>(::toLines) {
 
     override fun part1(input: List<String>): Int = calculateResult(input) {
         it.isHorizontal() || it.isVertical()

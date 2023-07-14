@@ -10,7 +10,7 @@ import java.nio.file.Path
 class AdventOfCodeRunner(private val year: Int, private val day: Int, private val inputPath: Path) {
     private val log: Logger = LoggerFactory.getLogger(javaClass.simpleName)
 
-    private companion object Messages {
+    private companion object {
         private const val welcome = "Welcome to the Advent of Code CLI!"
         private const val solving = "Solving the Advent of Code puzzle for year {}, day {}"
         private const val loadedSolutionClass = "Loaded solution class"
@@ -28,7 +28,7 @@ class AdventOfCodeRunner(private val year: Int, private val day: Int, private va
         val solution = solutionClass.getDeclaredConstructor().newInstance() as Day<*>
         val input = loadInput(inputPath)
 
-        solution.solve()
+        solution.solve(input)
     }.onFailure {
         when (it) {
             is ClassNotFoundException -> log.error(errorClassNotFound, year, day)

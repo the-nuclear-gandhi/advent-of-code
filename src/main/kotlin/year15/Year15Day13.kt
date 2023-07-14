@@ -2,10 +2,9 @@ package year15
 
 import algorithm.solveTSP
 import shared.Day
+import shared.InputConverter.Companion.toLines
 
-class Year15Day13 : Day<List<String>>() {
-
-    override fun getInput(): List<String> = inputResource().asLines()
+class Year15Day13 : Day<List<String>>(::toLines) {
 
     override fun part1(input: List<String>): Int = solveTSP(distanceMap(input), true, this::criterion)
 

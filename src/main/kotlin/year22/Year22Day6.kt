@@ -1,10 +1,10 @@
 package year22
 
 import shared.Day
+import shared.InputConverter.Companion.noOp
 import kotlin.streams.toList
 
-class Year22Day6 : Day<String>() {
-    override fun getInput(): String = inputResource().asString()
+class Year22Day6 : Day<String>(::noOp) {
 
     override fun part1(input: String): Int = searchDistinctCharsOfLength(input, 4)
 

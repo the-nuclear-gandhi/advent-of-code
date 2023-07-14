@@ -1,9 +1,9 @@
 package year21
 
 import shared.Day
+import shared.InputConverter.Companion.toLines
 
-class Year21Day3 : Day<List<String>>() {
-    override fun getInput(): List<String> = inputResource().asLines()
+class Year21Day3 : Day<List<String>>(::toLines) {
 
     override fun part1(input: List<String>): Long {
         val gammaRateString = input[0].indices.mapNotNull {

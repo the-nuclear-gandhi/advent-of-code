@@ -1,10 +1,10 @@
 package year22
 
 import shared.Day
+import shared.InputConverter.Companion.toLines
 import shared.Point
 
-class Year22Day9 : Day<List<String>>() {
-    override fun getInput(): List<String> = inputResource().asLines()
+class Year22Day9 : Day<List<String>>(::toLines) {
 
     override fun part1(input: List<String>): Int = solve(input, 2)
 

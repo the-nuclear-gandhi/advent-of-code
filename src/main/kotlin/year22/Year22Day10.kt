@@ -1,9 +1,9 @@
 package year22
 
 import shared.Day
+import shared.InputConverter.Companion.toLines
 
-class Year22Day10 : Day<List<String>>() {
-    override fun getInput(): List<String> = inputResource().asLines()
+class Year22Day10 : Day<List<String>>(::toLines) {
 
     override fun part1(input: List<String>): Int = with(Device()) {
         val inputIterator = input.iterator()

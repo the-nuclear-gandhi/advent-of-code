@@ -1,10 +1,9 @@
 package year15
 
 import shared.Day
+import shared.InputConverter.Companion.noOp
 
-class Year15Day12 : Day<String>() {
-
-    override fun getInput(): String = inputResource().asString()
+class Year15Day12 : Day<String>(::noOp) {
 
     override fun part1(input: String): Int = input.split(Regex("[^0-9\\-]"))
         .mapNotNull { it.toIntOrNull() }

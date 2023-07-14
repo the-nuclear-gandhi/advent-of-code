@@ -1,10 +1,9 @@
 package year15
 
 import shared.Day
+import shared.InputConverter.Companion.toLines
 
-class Year15Day5 : Day<List<String>>() {
-
-    override fun getInput(): List<String> = inputResource().asLines()
+class Year15Day5 : Day<List<String>>(::toLines) {
 
     override fun part1(input: List<String>): Int = input
         .asSequence()

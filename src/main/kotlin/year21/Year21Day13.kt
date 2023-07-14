@@ -1,10 +1,10 @@
 package year21
 
 import shared.Day
+import shared.InputConverter.Companion.toLines
 import shared.Point
 
-class Year21Day13 : Day<List<String>>() {
-    override fun getInput(): List<String> = inputResource().asLines()
+class Year21Day13 : Day<List<String>>(::toLines) {
 
     override fun part1(input: List<String>): Int = parseInput(input).let { (points, instructions) ->
         foldByInstruction(points, instructions.first()).size

@@ -2,8 +2,10 @@ package year21
 
 import shared.Day
 
-class Year21Day6 : Day<String>() {
-    override fun getInput(): String = inputResource().asString().replace("\n", "")
+class Year21Day6 : Day<String>(::prepareInput) {
+    private companion object {
+        private fun prepareInput(input: String): String = input.replace("\n", "")
+    }
 
     override fun part1(input: String): Long = simulateLanternFishPopulation(input, 80)
 

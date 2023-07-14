@@ -3,8 +3,11 @@ package year21
 import shared.Day
 import kotlin.math.abs
 
-class Year21Day7 : Day<String>() {
-    override fun getInput(): String = inputResource().asString().replace("\n", "")
+class Year21Day7 : Day<String>(::prepareInput) {
+
+    private companion object {
+        private fun prepareInput(input: String): String = input.replace("\n", "")
+    }
 
     override fun part1(input: String): Int = inputToSortedList(input).let {
         val size = it.size

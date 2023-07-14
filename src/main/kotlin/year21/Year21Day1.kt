@@ -1,9 +1,9 @@
 package year21
 
 import shared.Day
+import shared.InputConverter.Companion.toInts
 
-class Year21Day1 : Day<List<Int>>() {
-    override fun getInput(): List<Int> = inputResource().asLines().map { it.toInt() }
+class Year21Day1 : Day<List<Int>>(::toInts) {
 
     override fun part1(input: List<Int>): Int = input.zipWithNext().count { it.second > it.first }
 
