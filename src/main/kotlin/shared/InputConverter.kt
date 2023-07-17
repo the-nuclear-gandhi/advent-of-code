@@ -7,7 +7,7 @@ class InputConverter private constructor() {
 
         fun toInts(input: String): List<Int> = toLines(input).map { it.toInt() }
 
-        fun toLines(input: String): List<String> = input.lines()
+        fun toLines(input: String): List<String> = input.lines().filter { it.isNotBlank() }
 
         fun toLineBlocks(input: String): List<LineBlock> = input.toLineBlocks()
 

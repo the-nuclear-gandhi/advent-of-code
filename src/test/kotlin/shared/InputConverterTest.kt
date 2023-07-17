@@ -58,6 +58,15 @@ class InputConverterTest {
             assertEquals(3, list.size)
             assertEquals(listOf("foo", "bar", "baz"), list)
         }
+
+        @ParameterizedTest
+        @ValueSource(strings = ["foo\nbar\n", "foo\n\nbar"])
+        fun `should ignore empty lines`(input: String) {
+            val list = InputConverter.toLines(input)
+            assertFalse(list.isEmpty())
+            assertEquals(2, list.size)
+            assertEquals(listOf("foo", "bar"), list)
+        }
     }
 
     @Nested
