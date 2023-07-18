@@ -26,6 +26,10 @@ sonar {
     }
 }
 
+jacoco {
+    toolVersion = "0.8.10"
+}
+
 tasks.test {
     useJUnitPlatform()
     finalizedBy(tasks.jacocoTestReport)
