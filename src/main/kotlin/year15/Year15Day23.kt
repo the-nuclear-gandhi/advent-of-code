@@ -19,30 +19,8 @@ class Year15Day23 : Day<List<String>>(::toLines) {
                             "tpl" -> registers.computeIfPresent(address) { _, v -> v * 3 }.also { i++ }
                             "inc" -> registers.computeIfPresent(address) { _, v -> v + 1 }.also { i++ }
                             "jmp" -> i += address.toInt()
-                            "jie" -> {
-                                val registerKey = address.substringBefore(",")
-                                val offset = address.substringAfter(",").trim().toInt()
-                                registers[registerKey]?.let {
-                                    i += if (it % 2 == 0L) {
-                                        offset
-                                    } else {
-                                        1
-                                    }
-                                }
-                            }
-
-                            "jio" -> {
-                                val registerKey = address.substringBefore(",")
-                                val offset = address.substringAfter(",").trim().toInt()
-                                registers[registerKey]?.let {
-                                    i += if (it == 1L) {
-                                        offset
-                                    } else {
-                                        1
-                                    }
-                                }
-                            }
-
+                            "jie" -> i += getConditionalOffset(registers, address) { it % 2 == 0L }
+                            "jio" -> i += getConditionalOffset(registers, address) { it == 1L }
                             else -> throw RuntimeException("Unknown command")
                         }
                     }
@@ -51,4 +29,14 @@ class Year15Day23 : Day<List<String>>(::toLines) {
                 registers.getValue("b")
             }
 
+    private fun getConditionalOffset(
+        registers: MutableMap<String, Long>,
+        address: String,
+        condition: (Long) -> Boolean
+    ): Int {
+        val registerKey = address.substringBefore(",")
+        val offset = address.substringAfter(",").trim().toInt()
+
+        return registers[registerKey]?.takeIf { condition(it) }?.let { offset } ?: 1
+    }
 }
