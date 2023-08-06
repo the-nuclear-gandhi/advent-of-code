@@ -57,11 +57,7 @@ class Year21Day11 : Day<List<String>>(::toLines) {
     }
 
     private data class ValuePoint(val point: Point, var value: Int) {
-        fun neighbours(): List<Point> = (point.x - 1..point.x + 1).flatMap { dx ->
-            (point.y - 1..point.y + 1).mapNotNull { dy ->
-                Point(dx, dy).takeUnless { it == point }
-            }
-        }
+        fun neighbours(): List<Point> = point.neighbours(true)
     }
 
     private fun List<ValuePoint>.findByPoint(point: Point): ValuePoint? = this.firstOrNull { it.point == point }

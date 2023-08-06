@@ -2,6 +2,7 @@ package year15
 
 import shared.Day
 import shared.InputConverter.Companion.toLines
+import shared.Point
 
 class Year15Day6 : Day<List<String>>(::toLines) {
 
@@ -19,11 +20,11 @@ class Year15Day6 : Day<List<String>>(::toLines) {
         input.forEach {
             val tokens = it.split(" ")
 
-            val start = parsePoint(tokens[tokens.size - 3])
-            val end = parsePoint(tokens.last())
+            val start = Point.fromString(tokens[tokens.size - 3])
+            val end = Point.fromString(tokens.last())
 
-            for (x in start.first..end.first) {
-                for (y in start.second..end.second) {
+            for (x in start.x..end.x) {
+                for (y in start.y..end.y) {
                     map[x][y] = transform(it, map[x][y])
                 }
             }
@@ -31,9 +32,6 @@ class Year15Day6 : Day<List<String>>(::toLines) {
 
         return map
     }
-
-    private fun parsePoint(s: String): Pair<Int, Int> =
-        Pair(s.substringBefore(",").toInt(), s.substringAfter(",").toInt())
 
     private fun transformPart1(command: String, item: Boolean): Boolean = when {
         command.startsWith("toggle") -> !item

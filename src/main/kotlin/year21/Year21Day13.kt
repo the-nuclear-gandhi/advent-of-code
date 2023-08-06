@@ -32,8 +32,7 @@ class Year21Day13 : Day<List<String>>(::toLines) {
     private fun parseInput(input: List<String>): Pair<MutableSet<Point>, List<Instruction>> {
         val firstInstructionLine = input.first { it.startsWith("fold") }
         val points = input.subList(0, input.indexOf(firstInstructionLine))
-            .map { it.split(",") }
-            .map { (x, y) -> Point(x.toInt(), y.toInt()) }
+            .map { Point.fromString(it) }
             .toMutableSet()
 
         val instructions = input.subList(input.indexOf(firstInstructionLine), input.size)
