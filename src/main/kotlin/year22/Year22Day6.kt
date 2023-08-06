@@ -1,7 +1,7 @@
 package year22
 
-import shared.Day
-import shared.InputConverter.Companion.noOp
+import core.Day
+import core.InputConverter.Companion.noOp
 import kotlin.streams.toList
 
 class Year22Day6 : Day<String>(::noOp) {

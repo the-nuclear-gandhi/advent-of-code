@@ -1,4 +1,4 @@
-package shared
+package core
 
 import com.github.ajalt.clikt.core.ProgramResult
 import org.slf4j.Logger

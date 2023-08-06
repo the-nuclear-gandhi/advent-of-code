@@ -1,4 +1,7 @@
-package shared
+package core
+
+import shared.LineBlock
+import shared.toLineBlocks
 
 class InputConverter private constructor() {
 

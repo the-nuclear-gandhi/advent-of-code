@@ -1,7 +1,7 @@
 package year22
 
-import shared.Day
-import shared.InputConverter.Companion.toLineBlocks
+import core.Day
+import core.InputConverter.Companion.toLineBlocks
 import shared.LineBlock
 
 class Year22Day11 : Day<List<LineBlock>>(::toLineBlocks) {

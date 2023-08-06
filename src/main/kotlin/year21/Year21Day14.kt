@@ -1,7 +1,7 @@
 package year21
 
-import shared.Day
-import shared.InputConverter.Companion.toLines
+import core.Day
+import core.InputConverter.Companion.toLines
 import kotlin.streams.toList
 
 class Year21Day14 : Day<List<String>>(::toLines) {

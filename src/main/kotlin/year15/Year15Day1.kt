@@ -1,7 +1,7 @@
 package year15
 
-import shared.Day
-import shared.InputConverter.Companion.noOp
+import core.Day
+import core.InputConverter.Companion.noOp
 
 class Year15Day1 : Day<String>(::noOp) {
 

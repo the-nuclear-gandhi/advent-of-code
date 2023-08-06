@@ -1,7 +1,7 @@
 package year15
 
-import shared.Day
-import shared.InputConverter.Companion.toLines
+import core.Day
+import core.InputConverter.Companion.toLines
 
 class Year15Day23 : Day<List<String>>(::toLines) {
     override fun part1(input: List<String>): Long = solve(mutableMapOf("a" to 0L, "b" to 0L), input)

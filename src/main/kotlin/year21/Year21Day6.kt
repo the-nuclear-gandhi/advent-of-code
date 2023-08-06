@@ -1,6 +1,6 @@
 package year21
 
-import shared.Day
+import core.Day
 
 class Year21Day6 : Day<String>(::prepareInput) {
     private companion object {

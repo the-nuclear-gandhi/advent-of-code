@@ -5,7 +5,7 @@ import com.github.ajalt.clikt.parameters.arguments.argument
 import com.github.ajalt.clikt.parameters.arguments.check
 import com.github.ajalt.clikt.parameters.types.int
 import com.github.ajalt.clikt.parameters.types.path
-import shared.AdventOfCodeRunner
+import core.AdventOfCodeRunner
 import java.nio.file.Path
 
 class AdventOfCode : CliktCommand() {

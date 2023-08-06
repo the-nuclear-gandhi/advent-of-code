@@ -1,7 +1,7 @@
 package year15
 
-import shared.Day
-import shared.InputConverter.Companion.toInts
+import core.Day
+import core.InputConverter.Companion.toInts
 
 class Year15Day17 : Day<List<Int>>(::toInts) {
 

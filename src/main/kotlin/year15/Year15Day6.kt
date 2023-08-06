@@ -1,7 +1,7 @@
 package year15
 
-import shared.Day
-import shared.InputConverter.Companion.toLines
+import core.Day
+import core.InputConverter.Companion.toLines
 import shared.Point
 
 class Year15Day6 : Day<List<String>>(::toLines) {

@@ -1,7 +1,7 @@
 package year15
 
-import shared.Day
-import shared.InputConverter.Companion.trimming
+import core.Day
+import core.InputConverter.Companion.trimming
 
 class Year15Day10 : Day<String>(::trimming) {
 

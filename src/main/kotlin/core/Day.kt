@@ -1,4 +1,4 @@
-package shared
+package core
 
 import org.slf4j.LoggerFactory
 

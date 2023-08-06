@@ -1,6 +1,6 @@
 package year21
 
-import shared.Day
+import core.Day
 import kotlin.math.abs
 
 class Year21Day7 : Day<String>(::prepareInput) {

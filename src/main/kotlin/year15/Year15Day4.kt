@@ -1,7 +1,7 @@
 package year15
 
-import shared.Day
-import shared.InputConverter.Companion.trimming
+import core.Day
+import core.InputConverter.Companion.trimming
 import java.security.MessageDigest
 import kotlin.text.Charsets.UTF_8
 

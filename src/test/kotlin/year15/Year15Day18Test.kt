@@ -3,7 +3,7 @@ package year15
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
-import shared.InputConverter
+import core.InputConverter
 
 class Year15Day18Test {
 
