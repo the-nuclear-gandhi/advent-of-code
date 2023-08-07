@@ -6,59 +6,51 @@ import shared.Point
 
 class Year21Day11 : Day<List<String>>(::toLines) {
 
-    override fun part1(input: List<String>): Int = parseValuePoints(input).let {
-        var valuePoints = it
+    override fun part1(input: List<String>): Int = parseLightMap(input).run {
+        var lightMap = this
         var flashCount = 0
-        repeat(100) {
-            valuePoints = simulateFlashing(valuePoints)
-            flashCount += valuePoints.count { valuePoint -> valuePoint.value == 0 }
+        repeat(100) { _ ->
+            lightMap = simulateFlashing(lightMap).also { flashCount += lightMap.count { it.value == 0 } }
         }
 
         flashCount
     }
 
-    override fun part2(input: List<String>): Int = parseValuePoints(input).let {
-        var valuePoints = it
+    override fun part2(input: List<String>): Int = parseLightMap(input).run {
+        var lightMap = this
         var day = 0
-
-        while (valuePoints.any { valuePoint -> valuePoint.value != 0 }) {
-            valuePoints = simulateFlashing(valuePoints)
-            day++
+        while (this.any { it.value != 0 }) {
+            lightMap = simulateFlashing(lightMap).also { day++ }
         }
 
         day
     }
 
-    private fun parseValuePoints(input: List<String>): List<ValuePoint> = input.flatMapIndexed { index, s ->
-        s.indices.map { ValuePoint(Point(index, it), s[it].toString().toInt()) }
-    }
+    private fun parseLightMap(input: List<String>): MutableMap<Point, Int> =
+        input.flatMapIndexed { index, s -> s.indices.map { Point(index, it) to s[it].toString().toInt() } }
+            .associate { it.first to it.second }
+            .toMutableMap()
 
-    private fun simulateFlashing(valuePoints: List<ValuePoint>): List<ValuePoint> {
-        valuePoints.forEach { it.value++ }
+    private fun simulateFlashing(lightMap: MutableMap<Point, Int>): MutableMap<Point, Int> {
+        lightMap.keys.forEach { lightMap.computeIfPresent(it) { _, v -> v + 1 } }
 
-        val flashingPoints = valuePoints.filter { it.value > 9 }.toMutableList()
+        val flashingPoints = lightMap.filter { it.value > 9 }.map { it.key }.toMutableList()
         val visitedPoints = mutableSetOf<Point>()
 
         while (flashingPoints.isNotEmpty()) {
             val flashingPoint = flashingPoints.removeFirst()
-            if (flashingPoint.point !in visitedPoints) {
-                flashingPoint.neighbours().mapNotNull { valuePoints.findByPoint(it) }
-                    .onEach { it.value++ }
-                    .filter { it.value > 9 }
-                    .forEach { flashingPoints.add(it) }
+            if (flashingPoint !in visitedPoints) {
+                flashingPoint.neighbours(true)
+                    .filter { it in lightMap.keys }
+                    .onEach { lightMap.computeIfPresent(it) { _, v -> v + 1 } }
+                    .filter { lightMap.getValue(it) > 9 }
+                    .forEach { flashingPoints += it }
             }
-            visitedPoints.add(flashingPoint.point)
+            visitedPoints += flashingPoint
         }
 
-        visitedPoints.mapNotNull { valuePoints.findByPoint(it) }
-            .forEach { it.value = 0 }
+        visitedPoints.filter { it in lightMap.keys }.forEach { lightMap[it] = 0 }
 
-        return valuePoints
+        return lightMap
     }
-
-    private data class ValuePoint(val point: Point, var value: Int) {
-        fun neighbours(): List<Point> = point.neighbours(true)
-    }
-
-    private fun List<ValuePoint>.findByPoint(point: Point): ValuePoint? = this.firstOrNull { it.point == point }
 }

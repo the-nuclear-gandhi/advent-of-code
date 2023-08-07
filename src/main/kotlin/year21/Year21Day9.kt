@@ -6,49 +6,40 @@ import shared.Point
 
 class Year21Day9 : Day<List<String>>(::toLines) {
 
-    override fun part1(input: List<String>): Int = parseValuePoints(input).let { valuePoints ->
-        findLowPoints(valuePoints).sumOf { it.value + 1 }
+    override fun part1(input: List<String>): Int = parseHeightMap(input).let { heightMap ->
+        findLowPoints(heightMap).sumOf { it.value + 1 }
     }
 
-    override fun part2(input: List<String>): Long = parseValuePoints(input).let { valuePoints ->
-        findLowPoints(valuePoints).map { findBasin(it, valuePoints).size.toLong() }
+    override fun part2(input: List<String>): Long = parseHeightMap(input).let { heightMap ->
+        findLowPoints(heightMap).map { findBasin(it.key, heightMap).size.toLong() }
             .sortedDescending()
             .take(3)
             .reduce { acc, i -> acc * i }
     }
 
-    private fun parseValuePoints(input: List<String>): List<ValuePoint> = input.flatMapIndexed { index, s ->
-        s.indices.map {
-            ValuePoint(Point(index, it), s[it].toString().toInt())
-        }
-    }
+    private fun parseHeightMap(input: List<String>): Map<Point, Int> =
+        input.flatMapIndexed { index, s -> s.indices.map { Point(index, it) to s[it].toString().toInt() } }
+            .associate { it.first to it.second }
 
-    private fun findLowPoints(valuePoints: List<ValuePoint>): List<ValuePoint> = valuePoints.filter {
-        it.point.neighbours()
-            .mapNotNull { point -> valuePoints.findByPoint(point) }
-            .all { valuePoint -> valuePoint > it }
-    }
+    private fun findLowPoints(heightMap: Map<Point, Int>): Set<Map.Entry<Point, Int>> = heightMap.filterKeys { key ->
+        key.neighbours()
+            .filter { it in heightMap.keys }
+            .all { heightMap.getValue(it) > heightMap.getValue(key) }
+    }.entries
 
-    private fun findBasin(lowPoint: ValuePoint, valuePoints: List<ValuePoint>): Set<Point> {
+    private fun findBasin(lowPoint: Point, heightMap: Map<Point, Int>): Set<Point> {
         val pointsToVisit = mutableListOf(lowPoint)
         val visitedPoints = mutableSetOf<Point>()
         while (pointsToVisit.isNotEmpty()) {
             val visiting = pointsToVisit.removeFirst()
-            visiting.point.neighbours()
-                .filter { it !in visitedPoints }
-                .mapNotNull { valuePoints.findByPoint(it) }
-                .filter { it.value < 9 }
-                .let { pointsToVisit.addAll(it) }
+            visiting.neighbours()
+                .filter { it !in visitedPoints && it in heightMap.keys }
+                .filter { heightMap.getValue(it) < 9 }
+                .let { pointsToVisit += it }
 
-            visitedPoints.add(visiting.point)
+            visitedPoints += visiting
         }
 
         return visitedPoints
     }
-
-    private data class ValuePoint(val point: Point, val value: Int) {
-        operator fun compareTo(other: ValuePoint): Int = value - other.value
-    }
-
-    private fun List<ValuePoint>.findByPoint(point: Point): ValuePoint? = this.firstOrNull { it.point == point }
 }
