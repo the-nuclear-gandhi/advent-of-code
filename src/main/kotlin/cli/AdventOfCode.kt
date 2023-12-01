@@ -11,7 +11,7 @@ import java.nio.file.Path
 class AdventOfCode : CliktCommand() {
     private val year: Int by argument(help = "Advent of Code year")
         .int()
-        .check("year must be between 2015 & 2022") { it in 2015..2022 }
+        .check("year must be between 2015 & 2023") { it in 2015..2023 }
     private val day: Int by argument(help = "Advent of Code day")
         .int()
         .check("day must be between 1 & 25") { it in 1..25 }
