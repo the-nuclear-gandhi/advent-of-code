@@ -2,6 +2,7 @@ package year21
 
 import core.Day
 import core.InputConverter.Companion.noOp
+import shared.toIntList
 
 class Year21Day4 : Day<String>(::noOp) {
 
@@ -15,9 +16,7 @@ class Year21Day4 : Day<String>(::noOp) {
 
     private fun parseInput(input: String): GameOfBingo {
         val lines = input.lines()
-        val numbers = lines[0].split(",")
-            .map { it.toInt() }
-            .toList()
+        val numbers = lines[0].toIntList(",")
 
         val boards = lines.subList(2, lines.size)
             .filterNot { it.isBlank() }

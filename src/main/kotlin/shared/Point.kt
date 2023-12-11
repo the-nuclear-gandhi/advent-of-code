@@ -3,8 +3,7 @@ package shared
 data class Point(val x: Int, val y: Int) {
 
     companion object {
-        fun fromString(s: String, separator: String = ","): Point = s.split(separator)
-            .mapNotNull { it.toIntOrNull() }
+        fun fromString(s: String, separator: String = ","): Point = s.toIntList(separator)
             .let {
                 require(it.size == 2) {
                     "Invalid arguments provided to construct a 2D Point, expected 2 values, got $it from String $s"

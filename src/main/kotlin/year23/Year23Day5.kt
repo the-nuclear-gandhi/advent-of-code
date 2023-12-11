@@ -3,6 +3,7 @@ package year23
 import core.Day
 import core.InputConverter.Companion.toLineBlocks
 import shared.LineBlock
+import shared.toLongList
 
 class Year23Day5 : Day<List<LineBlock>>(::toLineBlocks) {
     override fun part1(input: List<LineBlock>): Long = with(inputToAlmanac(input)) {
@@ -22,14 +23,13 @@ class Year23Day5 : Day<List<LineBlock>>(::toLineBlocks) {
     private fun inputToAlmanac(input: List<LineBlock>): Almanac {
         val seeds = input[0][0].substringAfter(":")
             .trim()
-            .split(" ")
-            .mapNotNull { it.toLongOrNull() }
+            .toLongList(" ")
 
         val mappings = input.drop(1)
             .map { mapping ->
                 mapping.drop(1)
                     .filter { it.isNotEmpty() }
-                    .map { it.split(" ").mapNotNull { token -> token.toLongOrNull() } }
+                    .map { it.toLongList(" ") }
                     .associate { it[1]..<it[1] + it[2] to it[0]..<it[0] + it[2] }
             }
 

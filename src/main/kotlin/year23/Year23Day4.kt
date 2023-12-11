@@ -2,6 +2,7 @@ package year23
 
 import core.Day
 import core.InputConverter.Companion.toLines
+import shared.toIntList
 
 class Year23Day4 : Day<List<String>>(::toLines) {
     override fun part1(input: List<String>): Int = parseInput(input)
@@ -25,7 +26,5 @@ class Year23Day4 : Day<List<String>>(::toLines) {
 
         winningNumbers to receivedNumbers
     }
-
-    private fun String.toIntList(): List<Int> = this.trim().split(" ").mapNotNull { it.toIntOrNull() }
 }
 

@@ -10,7 +10,7 @@ class Year15Day10 : Day<String>(::trimming) {
     override fun part2(input: String): Int = lookAndSay(input, 50)
 
     internal fun lookAndSay(startingString: String, times: Int): Int {
-        var digits = startingString.map { it.toString().toInt() }.toList()
+        var digits = startingString.map { it.digitToInt() }.toList()
 
         repeat(times) {
             var previousDigit = digits[0]

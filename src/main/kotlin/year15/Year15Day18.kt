@@ -10,9 +10,7 @@ class Year15Day18 : Day<List<String>>(::toLines) {
     override fun part2(input: List<String>): Int = solvePart2(input, 100)
 
     internal fun solvePart1(input: List<String>, times: Int): Int {
-        var lightMap = input.map { s ->
-            s.map { it == '#' }.toList()
-        }
+        var lightMap = input.map { s -> s.map { it == '#' } }
 
         repeat(times) {
             lightMap = lightMap.mapIndexed { x, lightRow ->
@@ -40,7 +38,7 @@ class Year15Day18 : Day<List<String>>(::toLines) {
         )
 
         var lightMap = input.mapIndexed { x, s ->
-            s.mapIndexed { y, c -> Point(x, y) in cornerPoints || c == '#' }.toList()
+            s.mapIndexed { y, c -> Point(x, y) in cornerPoints || c == '#' }
         }
 
         repeat(times) {

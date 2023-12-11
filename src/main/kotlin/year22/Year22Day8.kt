@@ -49,7 +49,7 @@ class Year22Day8 : Day<List<String>>(::toLines) {
             }.max()
         }
 
-    private fun List<String>.toIntGrid(): List<List<Int>> = this.map { s -> s.map { it.toString().toInt() } }
+    private fun List<String>.toIntGrid(): List<List<Int>> = this.map { s -> s.map { it.digitToInt() } }
 
     private fun List<Int>.splitAtIndex(index: Int): List<List<Int>> =
         listOf(this.subList(0, index), this.subList(index + 1, this.size))

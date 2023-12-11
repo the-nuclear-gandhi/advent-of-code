@@ -2,6 +2,7 @@ package year15
 
 import core.Day
 import core.InputConverter.Companion.toLines
+import shared.toIntList
 
 class Year15Day14 : Day<List<String>>(::toLines) {
 
@@ -19,7 +20,7 @@ class Year15Day14 : Day<List<String>>(::toLines) {
         val score = IntArray(deerList.size)
 
         for (t in 1..time + 1) {
-            val distances = deerList.map { distanceAtTime(t, it) }.toList()
+            val distances = deerList.map { distanceAtTime(t, it) }
             val maxDistance = distances.maxOrNull()!!
 
             distances.mapIndexed { index, distance -> index to distance }
@@ -31,13 +32,8 @@ class Year15Day14 : Day<List<String>>(::toLines) {
     }
 
     private fun inputToDeerList(input: List<String>): List<Deer> =
-        input.map {
-            it.split(" ")
-                .mapNotNull { token -> token.toIntOrNull() }
-                .toList()
-        }
+        input.map { it.toIntList() }
             .map { (speed, flyingTime, restingTime) -> Deer(speed, flyingTime, restingTime) }
-            .toList()
 
     private fun distanceAtTime(time: Int, deer: Deer): Int {
         val totalPeriods = time / (deer.flyingTime + deer.restingTime)

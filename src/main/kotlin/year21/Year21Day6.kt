@@ -1,6 +1,7 @@
 package year21
 
 import core.Day
+import shared.toIntList
 
 class Year21Day6 : Day<String>(::prepareInput) {
     private companion object {
@@ -11,8 +12,7 @@ class Year21Day6 : Day<String>(::prepareInput) {
 
     override fun part2(input: String): Long = simulateLanternFishPopulation(input, 256)
 
-    private fun simulateLanternFishPopulation(input: String, days: Int): Long = input.split(",")
-        .map { it.toInt() }
+    private fun simulateLanternFishPopulation(input: String, days: Int): Long = input.toIntList(",")
         .let { fish -> LongArray(9) { fish.count { n -> n == it }.toLong() } }
         .apply {
             repeat(days) {

@@ -30,7 +30,6 @@ class Year21Day10 : Day<List<String>>(::toLines) {
                     }
                 }
                     .fold(0L) { acc, i -> acc * 5 + i }
-                    .toLong()
             }
             .sorted()
             .let { it[it.size / 2] }

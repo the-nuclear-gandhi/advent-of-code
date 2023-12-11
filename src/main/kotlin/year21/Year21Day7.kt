@@ -1,6 +1,7 @@
 package year21
 
 import core.Day
+import shared.toIntList
 import kotlin.math.abs
 
 class Year21Day7 : Day<String>(::prepareInput) {
@@ -26,7 +27,5 @@ class Year21Day7 : Day<String>(::prepareInput) {
         }
     }
 
-    private fun inputToSortedList(input: String) = input.split(",")
-        .map { it.toInt() }
-        .sorted()
+    private fun inputToSortedList(input: String) = input.toIntList(",").sorted()
 }

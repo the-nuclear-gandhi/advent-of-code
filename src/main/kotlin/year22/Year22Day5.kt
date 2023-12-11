@@ -3,6 +3,7 @@ package year22
 import core.Day
 import core.InputConverter.Companion.toLineBlocks
 import shared.LineBlock
+import shared.toIntList
 
 class Year22Day5 : Day<List<LineBlock>>(::toLineBlocks) {
 
@@ -18,7 +19,7 @@ class Year22Day5 : Day<List<LineBlock>>(::toLineBlocks) {
         val size = containerInput.last()
             .toCharArray()
             .filter { it.isDigit() }
-            .maxOf { it.toString().toInt() }
+            .maxOf { it.digitToInt() }
         val state = MutableList(size) { mutableListOf<Char>() }
 
         containerInput.dropLast(1)
@@ -40,8 +41,7 @@ class Year22Day5 : Day<List<LineBlock>>(::toLineBlocks) {
         instructions: List<String>,
         containerOrderingRule: (List<Char>) -> List<Char>
     ): String =
-        instructions.flatMap { it.split(" ") }
-            .mapNotNull { it.toIntOrNull() }
+        instructions.flatMap { it.toIntList(" ") }
             .chunked(3)
             .map { (count, from, to) ->
                 run {

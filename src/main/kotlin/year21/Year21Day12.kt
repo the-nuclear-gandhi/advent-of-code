@@ -24,7 +24,8 @@ class Year21Day12 : Day<List<String>>(::toLines) {
         if (current == "end") {
             1
         } else {
-            paths.filter { it.first == current || it.second == current }
+            paths.asSequence()
+                .filter { it.first == current || it.second == current }
                 .flatMap { setOf(it.first, it.second) }
                 .filterNot { it == current || it == "start" }
                 .filterNot { filteringPredicate(it, visited + current) }
