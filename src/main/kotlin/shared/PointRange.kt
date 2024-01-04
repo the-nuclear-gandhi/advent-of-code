@@ -17,7 +17,7 @@ data class PointRange(val start: Point, val end: Point) {
             y += 1 * yIncline.sign
         }
         points += end
-        points
+        points.toList()
     }
 
     fun isVertical(): Boolean = start.x == end.x
