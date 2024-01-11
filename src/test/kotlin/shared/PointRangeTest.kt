@@ -1,7 +1,6 @@
 package shared
 
-import org.junit.jupiter.api.Assertions.assertFalse
-import org.junit.jupiter.api.Assertions.assertTrue
+import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
 
@@ -46,7 +45,7 @@ class PointRangeTest {
         val pointRange = PointRange(Point(0, 0), Point(2, 2))
         assertFalse(pointRange.isVertical())
 
-        val verticalPointRange = PointRange(Point(3, 5), Point(3, -3))
+        val verticalPointRange = PointRange(Point(-3, 5), Point(3, 5))
         assertTrue(verticalPointRange.isVertical())
     }
 
@@ -55,7 +54,19 @@ class PointRangeTest {
         val pointRange = PointRange(Point(0, 0), Point(2, 2))
         assertFalse(pointRange.isHorizontal())
 
-        val horizontalPointRange = PointRange(Point(3, 5), Point(-3, 5))
+        val horizontalPointRange = PointRange(Point(3, 5), Point(3, -5))
         assertTrue(horizontalPointRange.isHorizontal())
+    }
+
+    @Test
+    fun `should correctly calculate the size of the range`() {
+        val pointRange = PointRange(Point(0, 0), Point(2, 2))
+        assertEquals(3, pointRange.size)
+
+        val horizontalPointRange = PointRange(Point(0, 0), Point(0, 5))
+        assertEquals(6, horizontalPointRange.size)
+
+        val verticalPointRange = PointRange(Point(0, 0), Point(4, 0))
+        assertEquals(5, verticalPointRange.size)
     }
 }
