@@ -14,7 +14,7 @@ dependencies {
     implementation("com.github.ajalt.clikt:clikt:4.2.2")
     implementation("ch.qos.logback:logback-classic:1.4.14")
 
-    testImplementation(platform("org.junit:junit-bom:5.10.1"))
+    testImplementation(platform("org.junit:junit-bom:5.10.2"))
     testImplementation("org.junit.jupiter:junit-jupiter")
 }
 
