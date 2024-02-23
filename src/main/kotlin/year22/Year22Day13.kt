@@ -23,10 +23,9 @@ class Year22Day13 : Day<List<LineBlock>>(::toLineBlocks) {
             .filter { it.isNotEmpty() }
             .map { parseList(it) }
             .toMutableList()
-            .let {
-                it.add(dividerPacket1)
-                it.add(dividerPacket2)
-                it
+            .apply {
+                this.add(dividerPacket1)
+                this.add(dividerPacket2)
             }
             .sortedWith(MultiTypeListComparator())
             .let {
