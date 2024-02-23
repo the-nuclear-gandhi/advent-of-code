@@ -1,52 +1,20 @@
 package year22
 
-import org.junit.jupiter.api.Assertions.assertEquals
-import org.junit.jupiter.api.Nested
-import org.junit.jupiter.params.ParameterizedTest
-import org.junit.jupiter.params.provider.Arguments
-import org.junit.jupiter.params.provider.MethodSource
+import core.DayTest
 
-class Year22Day6Test {
+private val inputs = listOf(
+    "mjqjpqmgbljsphdztnvjfqwrcgsmlb",
+    "bvwbjplbgvbhsrlpgdmjqwftvncz",
+    "nppdvjthqldpwncqszvftbrmjlhg",
+    "nznrnfrfntjfmvfwmzdfjlvtqnbhcprsg",
+    "zcfzfwzzqfrljwzlrfnpqdbhtmscgvjw"
+)
 
-    val year22Day6 = Year22Day6()
+private val part1Answers = listOf(7, 5, 6, 10, 11)
+private val part2Answers = listOf(19, 23, 23, 29, 26)
 
-    @Nested
-    inner class TestPart1 {
-
-        @ParameterizedTest
-        @MethodSource("year22.Year22Day6Test#part1TestData")
-        fun checkPart1(input: String, expectedResult: Int) {
-            assertEquals(expectedResult, year22Day6.part1(input))
-        }
-    }
-
-    @Nested
-    inner class TestPart2 {
-
-        @ParameterizedTest
-        @MethodSource("year22.Year22Day6Test#part2TestData")
-        fun checkPart2(input: String, expectedResult: Int) {
-            assertEquals(expectedResult, year22Day6.part2(input))
-        }
-    }
-
-    companion object {
-        @JvmStatic
-        private fun part1TestData(): List<Arguments> = listOf(
-            Arguments.of("mjqjpqmgbljsphdztnvjfqwrcgsmlb", 7),
-            Arguments.of("bvwbjplbgvbhsrlpgdmjqwftvncz", 5),
-            Arguments.of("nppdvjthqldpwncqszvftbrmjlhg", 6),
-            Arguments.of("nznrnfrfntjfmvfwmzdfjlvtqnbhcprsg", 10),
-            Arguments.of("zcfzfwzzqfrljwzlrfnpqdbhtmscgvjw", 11)
-        )
-
-        @JvmStatic
-        private fun part2TestData(): List<Arguments> = listOf(
-            Arguments.of("mjqjpqmgbljsphdztnvjfqwrcgsmlb", 19),
-            Arguments.of("bvwbjplbgvbhsrlpgdmjqwftvncz", 23),
-            Arguments.of("nppdvjthqldpwncqszvftbrmjlhg", 23),
-            Arguments.of("nznrnfrfntjfmvfwmzdfjlvtqnbhcprsg", 29),
-            Arguments.of("zcfzfwzzqfrljwzlrfnpqdbhtmscgvjw", 26)
-        )
-    }
-}
+class Year22Day6Test : DayTest<String, Int, Int>(
+    Year22Day6::class.java,
+    inputs.mapIndexed { index, s -> s to part1Answers[index] },
+    inputs.mapIndexed { index, s -> s to part2Answers[index] }
+)

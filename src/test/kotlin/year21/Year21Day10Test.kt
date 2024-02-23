@@ -1,40 +1,26 @@
 package year21
 
-import org.junit.jupiter.api.Assertions.assertEquals
-import org.junit.jupiter.api.Nested
-import org.junit.jupiter.api.Test
+import core.DayTest
 
-class Year21Day10Test {
+private val defaultInput = """
+    [({(<(())[]>[[{[]{<()<>>
+    [(()[<>])]({[<{<<[]>>(
+    {([(<{}[<>[]}>{[]{[(<()>
+    (((({<>}<{<{<>}{[]{[]{}
+    [[<[([]))<([[{}[[()]]]
+    [{[{({}]{}}([{[{{{}}([]
+    {<[[]]>}<{[{[{[]{()[[[]
+    [<(<(<(<{}))><([]([]()
+    <{([([[(<>()){}]>(<<{{
+    <{([{{}}[<[[[<>{}]]]>[]]
+""".trimIndent()
 
-    val year21Day10 = Year21Day10()
-    val input = listOf(
-        "[({(<(())[]>[[{[]{<()<>>",
-        "[(()[<>])]({[<{<<[]>>(",
-        "{([(<{}[<>[]}>{[]{[(<()>",
-        "(((({<>}<{<{<>}{[]{[]{}",
-        "[[<[([]))<([[{}[[()]]]",
-        "[{[{({}]{}}([{[{{{}}([]",
-        "{<[[]]>}<{[{[{[]{()[[[]",
-        "[<(<(<(<{}))><([]([]()",
-        "<{([([[(<>()){}]>(<<{{",
-        "<{([{{}}[<[[[<>{}]]]>[]]",
+class Year21Day10Test : DayTest<List<String>, Int, Long>(
+    Year21Day10::class.java,
+    listOf(
+        defaultInput to 26397
+    ),
+    listOf(
+        defaultInput to 288957
     )
-
-    @Nested
-    inner class TestPart1 {
-
-        @Test
-        fun `should return 26397`() {
-            assertEquals(26397, year21Day10.part1(input))
-        }
-    }
-
-    @Nested
-    inner class TestPart2 {
-
-        @Test
-        fun `should return 288957`() {
-            assertEquals(288957, year21Day10.part2(input))
-        }
-    }
-}
+)

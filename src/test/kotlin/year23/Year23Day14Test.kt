@@ -1,40 +1,26 @@
 package year23
 
-import org.junit.jupiter.api.Assertions.assertEquals
-import org.junit.jupiter.api.Nested
-import org.junit.jupiter.api.Test
+import core.DayTest
 
-class Year23Day14Test {
+private val defaultInput = """
+    O....#....
+    O.OO#....#
+    .....##...
+    OO.#O....O
+    .O.....O#.
+    O.#..O.#.#
+    ..O..#O..O
+    .......O..
+    #....###..
+    #OO..#....
+""".trimIndent()
 
-    val year23Day14 = Year23Day14()
-    val input = listOf(
-        "O....#....",
-        "O.OO#....#",
-        ".....##...",
-        "OO.#O....O",
-        ".O.....O#.",
-        "O.#..O.#.#",
-        "..O..#O..O",
-        ".......O..",
-        "#....###..",
-        "#OO..#...."
+class Year23Day14Test : DayTest<List<String>, Int, Int>(
+    Year23Day14::class.java,
+    listOf(
+        defaultInput to 136
+    ),
+    listOf(
+        defaultInput to 64
     )
-
-    @Nested
-    inner class TestPart1 {
-
-        @Test
-        fun `should return 136`() {
-            assertEquals(136, year23Day14.part1(input))
-        }
-    }
-
-    @Nested
-    inner class TestPart2 {
-
-        @Test
-        fun `should return 64`() {
-            assertEquals(64, year23Day14.part2(input))
-        }
-    }
-}
+)

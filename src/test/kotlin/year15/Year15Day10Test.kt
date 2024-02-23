@@ -8,10 +8,10 @@ import org.junit.jupiter.params.provider.ValueSource
 
 class Year15Day10Test {
 
-    val year15Day10 = Year15Day10()
-
     @Nested
     inner class TestLookAndSay {
+
+        private val year15Day10 = Year15Day10()
 
         @ParameterizedTest
         @ValueSource(strings = ["1", "11"])

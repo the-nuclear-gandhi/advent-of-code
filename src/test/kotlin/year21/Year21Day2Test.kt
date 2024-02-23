@@ -1,37 +1,22 @@
 package year21
 
-import org.junit.jupiter.api.Assertions.assertEquals
-import org.junit.jupiter.api.Nested
-import org.junit.jupiter.api.Test
+import core.DayTest
 
-class Year21Day2Test {
+private val defaultInput = """
+    forward 5
+    down 5
+    forward 8
+    up 3
+    down 8
+    forward 2
+""".trimIndent()
 
-    val year21Day2 = Year21Day2()
-    val input = listOf(
-        "forward 5",
-        "down 5",
-        "forward 8",
-        "up 3",
-        "down 8",
-        "forward 2"
+class Year21Day2Test : DayTest<List<String>, Long, Long>(
+    Year21Day2::class.java,
+    listOf(
+        defaultInput to 150
+    ),
+    listOf(
+        defaultInput to 900
     )
-
-    @Nested
-    inner class TestPart1 {
-
-        @Test
-        fun `should return 150`() {
-            assertEquals(150, year21Day2.part1(input))
-        }
-    }
-
-    @Nested
-    inner class TestPart2 {
-
-        @Test
-        fun `should return 900`() {
-            assertEquals(900, year21Day2.part2(input))
-        }
-    }
-
-}
+)
