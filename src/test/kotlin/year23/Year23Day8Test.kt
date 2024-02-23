@@ -1,63 +1,47 @@
 package year23
 
-import org.junit.jupiter.api.Assertions.assertEquals
-import org.junit.jupiter.api.Nested
-import org.junit.jupiter.api.Test
+import core.DayTest
 
-class Year23Day8Test {
+private val part1Input1 = """
+    RL
 
-    val year23Day8 = Year23Day8()
+    AAA = (BBB, CCC)
+    BBB = (DDD, EEE)
+    CCC = (ZZZ, GGG)
+    DDD = (DDD, DDD)
+    EEE = (EEE, EEE)
+    GGG = (GGG, GGG)
+    ZZZ = (ZZZ, ZZZ)
+""".trimIndent()
 
-    @Nested
-    inner class TestPart1 {
+private val part1Input2 = """
+    LLR
 
-        private val input = listOf(
-            "RL",
-            "AAA = (BBB, CCC)",
-            "BBB = (DDD, EEE)",
-            "CCC = (ZZZ, GGG)",
-            "DDD = (DDD, DDD)",
-            "EEE = (EEE, EEE)",
-            "GGG = (GGG, GGG)",
-            "ZZZ = (ZZZ, ZZZ)"
-        )
+    AAA = (BBB, BBB)
+    BBB = (AAA, ZZZ)
+    ZZZ = (ZZZ, ZZZ)
+""".trimIndent()
 
-        private val secondInput = listOf(
-            "LLR",
-            "AAA = (BBB, BBB)",
-            "BBB = (AAA, ZZZ)",
-            "ZZZ = (ZZZ, ZZZ)"
-        )
+private val part2Input = """
+    LR
 
-        @Test
-        fun `should return 2`() {
-            assertEquals(2, year23Day8.part1(input))
-        }
+    11A = (11B, XXX)
+    11B = (XXX, 11Z)
+    11Z = (11B, XXX)
+    22A = (22B, XXX)
+    22B = (22C, 22C)
+    22C = (22Z, 22Z)
+    22Z = (22B, 22B)
+    XXX = (XXX, XXX)
+""".trimIndent()
 
-        @Test
-        fun `should return 6`() {
-            assertEquals(6, year23Day8.part1(secondInput))
-        }
-    }
-
-    @Nested
-    inner class TestPart2 {
-
-        private val input = listOf(
-            "LR",
-            "11A = (11B, XXX)",
-            "11B = (XXX, 11Z)",
-            "11Z = (11B, XXX)",
-            "22A = (22B, XXX)",
-            "22B = (22C, 22C)",
-            "22C = (22Z, 22Z)",
-            "22Z = (22B, 22B)",
-            "XXX = (XXX, XXX)"
-        )
-
-        @Test
-        fun `should return 6`() {
-            assertEquals(6, year23Day8.part2(input))
-        }
-    }
-}
+class Year23Day8Test : DayTest<List<String>, Int, Long>(
+    Year23Day8::class.java,
+    listOf(
+        part1Input1 to 2,
+        part1Input2 to 6
+    ),
+    listOf(
+        part2Input to 6
+    )
+)

@@ -1,29 +1,15 @@
 package year21
 
-import org.junit.jupiter.api.Assertions.assertEquals
-import org.junit.jupiter.api.Nested
-import org.junit.jupiter.api.Test
+import core.DayTest
 
-class Year21Day6Test {
+private const val defaultInput = "3,4,3,1,2"
 
-    val year21Day6 = Year21Day6()
-    val input = "3,4,3,1,2"
-
-    @Nested
-    inner class TestPart1 {
-
-        @Test
-        fun `should return 5934`() {
-            assertEquals(5934, year21Day6.part1(input))
-        }
-    }
-
-    @Nested
-    inner class TestPart2 {
-
-        @Test
-        fun `should return 26984457539`() {
-            assertEquals(26_984_457_539, year21Day6.part2(input))
-        }
-    }
-}
+class Year21Day6Test : DayTest<String, Long, Long>(
+    Year21Day6::class.java,
+    listOf(
+        defaultInput to 5934
+    ),
+    listOf(
+        defaultInput to 26_984_457_539
+    )
+)

@@ -1,35 +1,20 @@
 package year15
 
-import org.junit.jupiter.api.Assertions.assertEquals
-import org.junit.jupiter.api.Nested
-import org.junit.jupiter.api.Test
+import core.DayTest
 
-class Year15Day23Test {
+private val defaultInput = """
+    inc b
+    jio b, +2
+    tpl b
+    inc b
+""".trimIndent()
 
-    val year15Day23 = Year15Day23()
-    val input = listOf(
-        "inc b",
-        "jio b, +2",
-        "tpl b",
-        "inc b",
+class Year15Day23Test : DayTest<List<String>, Long, Long>(
+    Year15Day23::class.java,
+    listOf(
+        defaultInput to 2
+    ),
+    listOf(
+        "inc b\n$defaultInput" to 7
     )
-
-    @Nested
-    inner class TestPart1 {
-
-        @Test
-        fun `should return 2`() {
-            assertEquals(2, year15Day23.part1(input))
-        }
-    }
-
-    @Nested
-    inner class TestPart2 {
-
-        @Test
-        fun `should return 7`() {
-            val modifiedInput = mutableListOf("inc b") + input
-            assertEquals(7, year15Day23.part2(modifiedInput))
-        }
-    }
-}
+)
