@@ -40,34 +40,27 @@ class Year15Day21 : Day<List<String>>(::toLines) {
         }
             .let { (hitPoints, damage, armor) -> Boss(hitPoints, damage, armor) }
 
-        val ringCombinations = rings.map { listOf(it) }.toMutableList()
-        val ringCombinationsOfTwo = rings.mapIndexed { index, item ->
-            rings.subList(index + 1, rings.size).map {
-                listOf(item, it)
+        val ringCombinations = rings.map { listOf(it) }.toMutableList() +
+            rings.flatMapIndexed { index, item ->
+                rings.subList(index + 1, rings.size).map {
+                    listOf(item, it)
+                }
             }
-        }.flatten()
-        ringCombinations.addAll(ringCombinationsOfTwo)
 
         return weapons.flatMap {
-            val player = Player(100, it)
-            val gameResults = mutableListOf(gameResult(player, boss))
-            gameResults.addAll(
-                ringCombinations.map { equippedRings ->
-                    gameResult(Player(100, it, rings = equippedRings), boss)
-                }
-            )
-
-            armor.forEach { armor ->
-                gameResults.add(gameResult(Player(100, it, armor), boss))
-
-                gameResults.addAll(
-                    ringCombinations.map { equippedRings ->
-                        gameResult(Player(100, it, armor, equippedRings), boss)
-                    }
-                )
+            ringCombinations.map { equippedRings ->
+                gameResult(Player(100, it, rings = equippedRings), boss)
             }
+                .toMutableList() +
 
-            gameResults
+                gameResult(Player(100, it), boss) +
+
+                armor.flatMap { equippedArmor ->
+                    ringCombinations.map { equippedRings ->
+                        gameResult(Player(100, it, equippedArmor, equippedRings), boss)
+                    }
+                        .toMutableList() + gameResult(Player(100, it, equippedArmor), boss)
+                }
         }
     }
 
@@ -75,23 +68,10 @@ class Year15Day21 : Day<List<String>>(::toLines) {
         val playerDamage = (player.damage() - boss.armor).takeIf { it > 0 } ?: 1
         val bossDamage = (boss.damage - player.armor()).takeIf { it > 0 } ?: 1
 
-        val movesToKillBoss = if (boss.hitPoints % playerDamage > 0) {
-            1
-        } else {
-            0
-        } + boss.hitPoints / playerDamage
+        val movesToKillBoss = boss.hitPoints / playerDamage + (boss.hitPoints % playerDamage).compareTo(0)
+        val movesToKillPlayer = player.hitPoints / bossDamage + (player.hitPoints % bossDamage).compareTo(0)
 
-        val movesToKillPlayer = if (player.hitPoints % bossDamage > 0) {
-            1
-        } else {
-            0
-        } + player.hitPoints / bossDamage
-
-        return if (movesToKillPlayer < movesToKillBoss) {
-            -player.cost()
-        } else {
-            player.cost()
-        }
+        return player.cost() * (movesToKillPlayer.compareTo(movesToKillBoss).takeIf { it != 0 } ?: 1)
     }
 
     private data class Boss(val hitPoints: Int, val damage: Int, val armor: Int)
