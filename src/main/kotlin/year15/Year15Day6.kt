@@ -16,22 +16,21 @@ class Year15Day6 : Day<List<String>>(::toLines) {
             .flatten()
             .sumOf { it.toLong() }
 
-    private fun <T> calculate(input: List<String>, map: Array<Array<T>>, transform: (String, T) -> T): Array<Array<T>> {
-        input.forEach {
-            val tokens = it.split(" ")
+    private fun <T> calculate(input: List<String>, map: Array<Array<T>>, transform: (String, T) -> T): Array<Array<T>> =
+        map.apply {
+            input.forEach {
+                val tokens = it.split(" ")
 
-            val start = Point.fromString(tokens[tokens.size - 3])
-            val end = Point.fromString(tokens.last())
+                val start = Point.fromString(tokens[tokens.size - 3])
+                val end = Point.fromString(tokens.last())
 
-            for (x in start.x..end.x) {
-                for (y in start.y..end.y) {
-                    map[x][y] = transform(it, map[x][y])
+                for (x in start.x..end.x) {
+                    for (y in start.y..end.y) {
+                        this[x][y] = transform(it, this[x][y])
+                    }
                 }
             }
         }
-
-        return map
-    }
 
     private fun transformPart1(command: String, item: Boolean): Boolean = when {
         command.startsWith("toggle") -> !item

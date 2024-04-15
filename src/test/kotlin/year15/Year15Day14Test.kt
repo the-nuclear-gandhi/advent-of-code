@@ -1,32 +1,19 @@
 package year15
 
-import org.junit.jupiter.api.Assertions.assertEquals
-import org.junit.jupiter.api.Nested
-import org.junit.jupiter.api.Test
+import core.DayTest
 
-class Year15Day14Test {
+private val defaultInput = """
+    Comet can fly 14 km/s for 10 seconds, but then must rest for 127 seconds.
+    Dancer can fly 16 km/s for 11 seconds, but then must rest for 162 seconds.
+""".trimIndent()
 
-    val year15Day14 = Year15Day14()
-    val input = listOf(
-        "Comet can fly 14 km/s for 10 seconds, but then must rest for 127 seconds.",
-        "Dancer can fly 16 km/s for 11 seconds, but then must rest for 162 seconds.",
-    )
-
-    @Nested
-    inner class TestPart1 {
-
-        @Test
-        fun `should return 1120`() {
-            assertEquals(1120, year15Day14.solvePart1(input, 1000))
-        }
-    }
-
-    @Nested
-    inner class TestPart2 {
-
-        @Test
-        fun `should return 689`() {
-            assertEquals(689, year15Day14.solvePart2(input, 1000))
-        }
-    }
-}
+class Year15Day14Test : DayTest<List<String>, Int, Int>(
+    Year15Day14::class.java,
+    listOf(
+        defaultInput to 1120
+    ),
+    listOf(
+        defaultInput to 689
+    ),
+    1000
+)

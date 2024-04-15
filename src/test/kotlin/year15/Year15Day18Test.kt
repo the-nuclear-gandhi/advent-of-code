@@ -7,7 +7,6 @@ import core.InputConverter
 
 class Year15Day18Test {
 
-    val year15Day18 = Year15Day18()
     val input = InputConverter.toLines(
         """
             .#.#.#
@@ -24,7 +23,7 @@ class Year15Day18Test {
 
         @Test
         fun `should return 4`() {
-            assertEquals(4, year15Day18.solvePart1(input, 4))
+            assertEquals(4, Year15Day18(4).part1(input))
         }
     }
 
@@ -33,7 +32,7 @@ class Year15Day18Test {
 
         @Test
         fun `should return 17`() {
-            assertEquals(17, year15Day18.solvePart2(input, 5))
+            assertEquals(17, Year15Day18(5).part2(input))
         }
     }
 }

@@ -42,7 +42,7 @@ class AdventOfCodeRunner(private val year: Int, private val day: Int, private va
     }
 
     private fun loadSolutionClass(year: Int, day: Int): Class<*> = (year % 2000).let {
-        val solutionClass = javaClass.classLoader.loadClass("year${it}.Year${it}Day${day}")
+        val solutionClass = Class.forName("year${it}.Year${it}Day${day}")
         require(Day::class.java.isAssignableFrom(solutionClass)) { "Solution class not assignable to Day" }
         solutionClass
     }.also { log.info(loadedSolutionClass) }

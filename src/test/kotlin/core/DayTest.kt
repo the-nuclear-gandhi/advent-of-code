@@ -11,10 +11,14 @@ import org.junit.jupiter.api.TestFactory
 abstract class DayTest<INPUT, PART1, PART2>(
     private val classUnderTest: Class<out Day<INPUT>>,
     private val part1Tests: List<Pair<String, PART1>>,
-    private val part2Tests: List<Pair<String, PART2>>
+    private val part2Tests: List<Pair<String, PART2>>,
+    vararg constructorParameters: Any = arrayOf(),
 ) {
 
-    private val instance: Day<INPUT> = classUnderTest.getDeclaredConstructor().newInstance()
+    @Suppress("UNCHECKED_CAST")
+    private val instance: Day<INPUT> = classUnderTest.declaredConstructors
+        .first { it.parameterCount == constructorParameters.size }
+        .newInstance(*constructorParameters) as Day<INPUT>
 
     @Test
     internal fun worksWithoutErrors() = assertDoesNotThrow {

@@ -3,13 +3,9 @@ package year15
 import core.Day
 import core.InputConverter.Companion.toInts
 
-class Year15Day17 : Day<List<Int>>(::toInts) {
+class Year15Day17(private val target: Int = 150) : Day<List<Int>>(::toInts) {
 
-    override fun part1(input: List<Int>): Int = solvePart1(input, 150)
-
-    override fun part2(input: List<Int>): Int = solvePart2(input, 150)
-
-    internal fun solvePart1(input: List<Int>, target: Int) = (1..input.size).sumOf {
+    override fun part1(input: List<Int>): Int = (1..input.size).sumOf {
         combinations(
             input,
             IntArray(it) { 0 },
@@ -20,7 +16,7 @@ class Year15Day17 : Day<List<Int>>(::toInts) {
         ).count { combination -> combination.sum() == target }
     }
 
-    internal fun solvePart2(input: List<Int>, target: Int): Int = (1..input.size).map {
+    override fun part2(input: List<Int>): Int = (1..input.size).map {
         combinations(
             input,
             IntArray(it) { 0 },

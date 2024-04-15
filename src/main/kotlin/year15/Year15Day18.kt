@@ -4,15 +4,11 @@ import core.Day
 import core.InputConverter.Companion.toLines
 import shared.Point
 
-class Year15Day18 : Day<List<String>>(::toLines) {
-    override fun part1(input: List<String>): Int = solvePart1(input, 100)
-
-    override fun part2(input: List<String>): Int = solvePart2(input, 100)
-
-    internal fun solvePart1(input: List<String>, times: Int): Int {
+class Year15Day18(private val repetitions: Int = 100) : Day<List<String>>(::toLines) {
+    override fun part1(input: List<String>): Int {
         var lightMap = input.map { s -> s.map { it == '#' } }
 
-        repeat(times) {
+        repeat(repetitions) {
             lightMap = lightMap.mapIndexed { x, lightRow ->
                 lightRow.mapIndexed { y, b ->
                     val neighboursOn = countNeighboursOn(lightMap, x, y)
@@ -24,12 +20,7 @@ class Year15Day18 : Day<List<String>>(::toLines) {
         return lightMap.flatten().count { it }
     }
 
-    private fun countNeighboursOn(lightMap: List<List<Boolean>>, x: Int, y: Int): Int = Point(x, y)
-        .neighbours(true)
-        .filter { it.x in lightMap.indices && it.y in lightMap[0].indices }
-        .count { lightMap[it.x][it.y] }
-
-    internal fun solvePart2(input: List<String>, times: Int): Int {
+    override fun part2(input: List<String>): Int {
         val cornerPoints = setOf(
             Point(0, 0),
             Point(0, input[0].length - 1),
@@ -41,7 +32,7 @@ class Year15Day18 : Day<List<String>>(::toLines) {
             s.mapIndexed { y, c -> Point(x, y) in cornerPoints || c == '#' }
         }
 
-        repeat(times) {
+        repeat(repetitions) {
             lightMap = lightMap.mapIndexed { x, lightRow ->
                 lightRow.mapIndexed { y, b ->
                     val neighboursOn = countNeighboursOn(lightMap, x, y)
@@ -52,4 +43,9 @@ class Year15Day18 : Day<List<String>>(::toLines) {
 
         return lightMap.flatten().count { it }
     }
+
+    private fun countNeighboursOn(lightMap: List<List<Boolean>>, x: Int, y: Int): Int = Point(x, y)
+        .neighbours(true)
+        .filter { it.x in lightMap.indices && it.y in lightMap[0].indices }
+        .count { lightMap[it.x][it.y] }
 }

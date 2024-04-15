@@ -4,19 +4,10 @@ import core.Day
 import core.InputConverter.Companion.toLines
 import shared.toIntList
 
-class Year15Day14 : Day<List<String>>(::toLines) {
+class Year15Day14(private val time: Int = 2503) : Day<List<String>>(::toLines) {
+    override fun part1(input: List<String>): Int = inputToDeerList(input).maxOf { distanceAtTime(time, it) }
 
-    private data class Deer(val speed: Int, val flyingTime: Int, val restingTime: Int)
-
-    override fun part1(input: List<String>): Int = solvePart1(input, 2503)
-
-    override fun part2(input: List<String>): Int = solvePart2(input, 2503)
-
-    internal fun solvePart1(input: List<String>, time: Int): Int =
-        inputToDeerList(input).maxOf { deer -> distanceAtTime(time, deer) }
-
-    internal fun solvePart2(input: List<String>, time: Int): Int {
-        val deerList = inputToDeerList(input)
+    override fun part2(input: List<String>): Int = inputToDeerList(input).let { deerList ->
         val score = IntArray(deerList.size)
 
         for (t in 1..time + 1) {
@@ -28,12 +19,11 @@ class Year15Day14 : Day<List<String>>(::toLines) {
                 .forEach { score[it.first]++ }
         }
 
-        return score.maxOrNull()!!
+        score.maxOrNull()!!
     }
 
-    private fun inputToDeerList(input: List<String>): List<Deer> =
-        input.map { it.toIntList() }
-            .map { (speed, flyingTime, restingTime) -> Deer(speed, flyingTime, restingTime) }
+    private fun inputToDeerList(input: List<String>): List<Deer> = input.map { it.toIntList() }
+        .map { (speed, flyingTime, restingTime) -> Deer(speed, flyingTime, restingTime) }
 
     private fun distanceAtTime(time: Int, deer: Deer): Int {
         val totalPeriods = time / (deer.flyingTime + deer.restingTime)
@@ -48,4 +38,6 @@ class Year15Day14 : Day<List<String>>(::toLines) {
 
         return distance
     }
+
+    private data class Deer(val speed: Int, val flyingTime: Int, val restingTime: Int)
 }
