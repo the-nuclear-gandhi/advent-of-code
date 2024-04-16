@@ -8,12 +8,11 @@ private val defaultInput = """
 """.trimIndent()
 
 class Year15Day14Test : DayTest<List<String>, Int, Int>(
-    Year15Day14::class.java,
+    Year15Day14(1000),
     listOf(
         defaultInput to 1120
     ),
     listOf(
         defaultInput to 689
-    ),
-    1000
+    )
 )

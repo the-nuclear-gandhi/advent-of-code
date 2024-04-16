@@ -9,16 +9,15 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.TestFactory
 
 abstract class DayTest<INPUT, PART1, PART2>(
-    private val classUnderTest: Class<out Day<INPUT>>,
+    private val instance: Day<INPUT>,
     private val part1Tests: List<Pair<String, PART1>>,
     private val part2Tests: List<Pair<String, PART2>>,
-    vararg constructorParameters: Any = arrayOf(),
 ) {
-
-    @Suppress("UNCHECKED_CAST")
-    private val instance: Day<INPUT> = classUnderTest.declaredConstructors
-        .first { it.parameterCount == constructorParameters.size }
-        .newInstance(*constructorParameters) as Day<INPUT>
+    constructor(
+        classUnderTest: Class<out Day<INPUT>>,
+        part1Tests: List<Pair<String, PART1>>,
+        part2Tests: List<Pair<String, PART2>>
+    ) : this(classUnderTest.getDeclaredConstructor().newInstance(), part1Tests, part2Tests)
 
     @Test
     internal fun worksWithoutErrors() = assertDoesNotThrow {
@@ -39,7 +38,7 @@ abstract class DayTest<INPUT, PART1, PART2>(
         testMethod: (INPUT) -> Any
     ): Collection<DynamicTest> =
         testParameters.map {
-            dynamicTest("${classUnderTest.simpleName}.$testMethodName() should return ${it.second}") {
+            dynamicTest("${instance.javaClass.simpleName}.$testMethodName() should return ${it.second}") {
                 assertEquals(it.second, testMethod(prepareInput(it.first)))
             }
         }
@@ -47,7 +46,7 @@ abstract class DayTest<INPUT, PART1, PART2>(
 
     @Suppress("UNCHECKED_CAST")
     private fun prepareInput(input: String): INPUT {
-        val inputConverterField = classUnderTest.superclass.getDeclaredField("inputConverter")
+        val inputConverterField = instance.javaClass.superclass.getDeclaredField("inputConverter")
             .apply { trySetAccessible() }
         val inputConverterFunction = inputConverterField.get(instance) as Function1<String, INPUT>
         return inputConverterFunction.invoke(input)
