@@ -8,18 +8,18 @@ class Year15Day14(private val time: Int = 2503) : Day<List<String>>(::toLines) {
     override fun part1(input: List<String>): Int = inputToDeerList(input).maxOf { distanceAtTime(time, it) }
 
     override fun part2(input: List<String>): Int = inputToDeerList(input).let { deerList ->
-        val score = IntArray(deerList.size)
-
-        for (t in 1..time + 1) {
-            val distances = deerList.map { distanceAtTime(t, it) }
-            val maxDistance = distances.maxOrNull()!!
-
-            distances.mapIndexed { index, distance -> index to distance }
-                .filter { it.second == maxDistance }
-                .forEach { score[it.first]++ }
-        }
-
-        score.maxOrNull()!!
+        IntArray(deerList.size).apply {
+            for (t in 1..time + 1) {
+                val distances = deerList.map { distanceAtTime(t, it) }
+                distances.max().let {
+                    distances.mapIndexed { index, distance ->
+                        if (distance == it) {
+                            this[index]++
+                        }
+                    }
+                }
+            }
+        }.max()
     }
 
     private fun inputToDeerList(input: List<String>): List<Deer> = input.map { it.toIntList() }
