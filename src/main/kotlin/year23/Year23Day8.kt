@@ -4,6 +4,7 @@ import core.Day
 import core.InputConverter.Companion.toLines
 
 class Year23Day8 : Day<List<String>>(::toLines) {
+
     override fun part1(input: List<String>): Int = with(parseInput(input)) {
         treeLength("AAA", this) { it == "ZZZ" }
     }

@@ -7,6 +7,7 @@ import shared.PointRange
 import kotlin.math.absoluteValue
 
 class Year23Day18 : Day<List<String>>(::toLines) {
+
     override fun part1(input: List<String>): Long = input.map { it.split(" ") }
         .map { Instruction(it[0], it[1].toInt()) }
         .let { solve(it) }

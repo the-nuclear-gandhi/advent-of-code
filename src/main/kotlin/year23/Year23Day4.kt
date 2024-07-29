@@ -5,6 +5,7 @@ import core.InputConverter.Companion.toLines
 import shared.toIntList
 
 class Year23Day4 : Day<List<String>>(::toLines) {
+
     override fun part1(input: List<String>): Int = parseInput(input)
         .map { (winning, received) -> received.count { it in winning } }
         .filter { it > 0 }

@@ -4,6 +4,7 @@ import core.Day
 import core.InputConverter.Companion.toLines
 
 class Year15Day23 : Day<List<String>>(::toLines) {
+
     override fun part1(input: List<String>): Long = solve(mutableMapOf("a" to 0L, "b" to 0L), input)
 
     override fun part2(input: List<String>): Long = solve(mutableMapOf("a" to 1L, "b" to 0L), input)

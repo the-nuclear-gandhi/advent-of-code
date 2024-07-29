@@ -5,6 +5,7 @@ import core.InputConverter.Companion.toLines
 import shared.Point
 
 class Year23Day16 : Day<List<String>>(::toLines) {
+
     override fun part1(input: List<String>): Int =
         countEnergizedPointsForBeam(input, DirectionPoint(0, 0, Direction.EAST))
 

@@ -4,6 +4,7 @@ import core.Day
 import core.InputConverter.Companion.toLines
 
 class Year15Day16 : Day<List<String>>(::toLines) {
+
     private val targetAuntSue = mapOf(
         "children" to 3,
         "cats" to 7,

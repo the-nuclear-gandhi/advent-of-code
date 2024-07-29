@@ -4,6 +4,7 @@ import core.Day
 import shared.toIntList
 
 class Year21Day6 : Day<String>(::prepareInput) {
+
     private companion object {
         private fun prepareInput(input: String): String = input.replace("\n", "")
     }

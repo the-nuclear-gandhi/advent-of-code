@@ -6,6 +6,7 @@ import shared.Point
 import kotlin.math.absoluteValue
 
 class Year23Day10 : Day<List<String>>(::toLines) {
+
     override fun part1(input: List<String>): Int = findMainLoop(input).size / 2
 
     override fun part2(input: List<String>): Int = findMainLoop(input).run {

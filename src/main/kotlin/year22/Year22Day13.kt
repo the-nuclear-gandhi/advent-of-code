@@ -5,6 +5,7 @@ import core.InputConverter.Companion.toLineBlocks
 import shared.LineBlock
 
 class Year22Day13 : Day<List<LineBlock>>(::toLineBlocks) {
+
     override fun part1(input: List<LineBlock>): Int = input.map { parseList(it[0]) to parseList(it[1]) }
         .mapIndexed { index, (left, right) ->
             if (left < right) {

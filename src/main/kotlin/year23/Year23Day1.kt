@@ -4,6 +4,7 @@ import core.Day
 import core.InputConverter.Companion.toLines
 
 class Year23Day1 : Day<List<String>>(::toLines) {
+
     override fun part1(input: List<String>): Int =
         input.map { it.filter { c -> c.isDigit() } }
             .map { "${it.first()}${it.last()}" }

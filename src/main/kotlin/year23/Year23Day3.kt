@@ -5,6 +5,7 @@ import core.InputConverter.Companion.toLines
 import shared.Point
 
 class Year23Day3 : Day<List<String>>(::toLines) {
+
     override fun part1(input: List<String>): Int = parseNumbers(input)
         .filter { number ->
             number.neighbours(input)

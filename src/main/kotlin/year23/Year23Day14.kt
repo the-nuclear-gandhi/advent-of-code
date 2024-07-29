@@ -4,6 +4,7 @@ import core.Day
 import core.InputConverter.Companion.toLines
 
 class Year23Day14 : Day<List<String>>(::toLines) {
+
     override fun part1(input: List<String>): Int =
         loadOnNorthBeams(tilt(input, onNorthAxis = true, reversedDirection = false))
 

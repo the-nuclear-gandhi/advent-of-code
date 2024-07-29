@@ -4,6 +4,7 @@ import core.Day
 import core.InputConverter.Companion.toLines
 
 class Year23Day7 : Day<List<String>>(::toLines) {
+
     override fun part1(input: List<String>): Int = solve(input, PlainGame())
 
     override fun part2(input: List<String>): Int = solve(input, JokerGame())

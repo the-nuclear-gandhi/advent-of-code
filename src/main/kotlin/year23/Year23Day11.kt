@@ -6,6 +6,7 @@ import shared.Point
 import kotlin.math.abs
 
 class Year23Day11 : Day<List<String>>(::toLines) {
+
     override fun part1(input: List<String>): Long = solve(input, 2)
 
     override fun part2(input: List<String>): Long = solve(input, 1_000_000)

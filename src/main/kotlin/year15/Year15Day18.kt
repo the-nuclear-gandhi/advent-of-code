@@ -5,6 +5,7 @@ import core.InputConverter.Companion.toLines
 import shared.Point
 
 class Year15Day18(private val repetitions: Int = 100) : Day<List<String>>(::toLines) {
+
     override fun part1(input: List<String>): Int {
         var lightMap = input.map { s -> s.map { it == '#' } }
 

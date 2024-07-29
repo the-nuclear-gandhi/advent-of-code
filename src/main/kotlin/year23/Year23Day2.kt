@@ -4,6 +4,7 @@ import core.Day
 import core.InputConverter.Companion.toLines
 
 class Year23Day2 : Day<List<String>>(::toLines) {
+
     override fun part1(input: List<String>): Int = parseInput(input)
         .filter { game -> game.gameSets.all { it.red <= 12 && it.green <= 13 && it.blue <= 14 } }
         .sumOf { it.id }

@@ -5,6 +5,7 @@ import core.InputConverter.Companion.toLines
 import shared.toLongList
 
 class Year23Day6 : Day<List<String>>(::toLines) {
+
     override fun part1(input: List<String>): Long = input.let {
         val times = it.first().toLongList(" ")
         val distances = it.last().toLongList(" ")

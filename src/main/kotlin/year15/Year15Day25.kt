@@ -4,6 +4,7 @@ import core.Day
 import core.InputConverter.Companion.noOp
 
 class Year15Day25 : Day<String>(::noOp) {
+
     override fun part1(input: String): Long {
         val targetRow = input.substringAfter("row").substringBefore(",").trim().toInt()
         val targetColumn = input.substringAfter("column").substringBefore(".").trim().toInt()

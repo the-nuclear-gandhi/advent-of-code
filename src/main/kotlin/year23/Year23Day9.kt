@@ -5,6 +5,7 @@ import core.InputConverter.Companion.toLines
 import shared.toIntList
 
 class Year23Day9 : Day<List<String>>(::toLines) {
+
     override fun part1(input: List<String>): Int = solve(input, ::followingNumber)
 
     override fun part2(input: List<String>): Int = solve(input, ::precedingNumber)

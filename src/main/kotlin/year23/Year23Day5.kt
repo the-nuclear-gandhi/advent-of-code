@@ -6,6 +6,7 @@ import shared.LineBlock
 import shared.toLongList
 
 class Year23Day5 : Day<List<LineBlock>>(::toLineBlocks) {
+
     override fun part1(input: List<LineBlock>): Long = with(inputToAlmanac(input)) {
         this.seeds.minOf { findLastMapping(it, mappings) }
     }

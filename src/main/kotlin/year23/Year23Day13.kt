@@ -5,6 +5,7 @@ import core.InputConverter.Companion.toLineBlocks
 import shared.LineBlock
 
 class Year23Day13 : Day<List<LineBlock>>(::toLineBlocks) {
+
     override fun part1(input: List<LineBlock>): Int =
         input.sumOf { perfectSymmetryFactor(it.indexedColumns()) + perfectSymmetryFactor(it.indexedRows()) * 100 }
 

@@ -4,6 +4,7 @@ import core.Day
 import core.InputConverter.Companion.noOp
 
 class Year23Day15 : Day<String>(::noOp) {
+
     override fun part1(input: String): Int =
         input.replace("\n", "").split(",")
             .sumOf { hash(it) }

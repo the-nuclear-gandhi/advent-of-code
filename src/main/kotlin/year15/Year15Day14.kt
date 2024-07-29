@@ -5,6 +5,7 @@ import core.InputConverter.Companion.toLines
 import shared.toIntList
 
 class Year15Day14(private val time: Int = 2503) : Day<List<String>>(::toLines) {
+
     override fun part1(input: List<String>): Int = inputToDeerList(input).maxOf { distanceAtTime(time, it) }
 
     override fun part2(input: List<String>): Int = inputToDeerList(input).let { deerList ->
