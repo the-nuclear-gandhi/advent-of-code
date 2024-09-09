@@ -12,7 +12,7 @@ version = "1.0"
 
 dependencies {
     implementation("com.github.ajalt.clikt:clikt:4.4.0")
-    implementation("ch.qos.logback:logback-classic:1.5.7")
+    implementation("ch.qos.logback:logback-classic:1.5.8")
 
     testImplementation(platform("org.junit:junit-bom:5.11.0"))
     testImplementation("org.junit.jupiter:junit-jupiter")
