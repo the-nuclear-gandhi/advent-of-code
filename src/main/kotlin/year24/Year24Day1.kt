@@ -18,7 +18,7 @@ class Year24Day1 : Day<List<String>>(::toLines) {
     }
 
     private fun inputToListOfIntLists(input: List<String>): List<List<Int>> =
-        input.map { s -> s.split(" ").filter { it.isNotEmpty() } }
+        input.map { s -> s.split(" ").filter { it.isNotBlank() } }
             .map { list -> list.map { it.toInt() } }
             .let { lists ->
                 listOf(
