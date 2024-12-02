@@ -19,21 +19,18 @@ class Year21Day13 : Day<List<String>>(::toLines) {
 
         for (y in 0..maxY) {
             for (x in 0..maxX) {
-                if (Point(x, y) in newPoints) {
-                    print("%")
-                } else {
-                    print(" ")
-                }
+                val char = "%".takeIf { Point(x, y) in newPoints } ?: " "
+                print(char)
             }
             println()
         }
     }
 
-    private fun parseInput(input: List<String>): Pair<MutableSet<Point>, List<Instruction>> {
+    private fun parseInput(input: List<String>): Pair<Set<Point>, List<Instruction>> {
         val firstInstructionLine = input.first { it.startsWith("fold") }
         val points = input.subList(0, input.indexOf(firstInstructionLine))
             .map { Point.fromString(it) }
-            .toMutableSet()
+            .toSet()
 
         val instructions = input.subList(input.indexOf(firstInstructionLine), input.size)
             .map { it.substringAfter("along").trim().split("=") }
@@ -43,17 +40,9 @@ class Year21Day13 : Day<List<String>>(::toLines) {
     }
 
     private fun foldByInstruction(points: Set<Point>, instruction: Instruction): MutableSet<Point> {
-        val targetCoordinate: (Point) -> Int = if (instruction.type == "x") { point ->
-            point.x
-        } else { point ->
-            point.y
-        }
-
-        val pointProducer: (Int, Point) -> Point = if (instruction.type == "x") { n, point ->
-            Point(n, point.y)
-        } else { n, point ->
-            Point(point.x, n)
-        }
+        val targetCoordinate: (Point) -> Int = { point -> point.x.takeIf { instruction.type == "x" } ?: point.y }
+        val pointProducer: (Int, Point) -> Point =
+            { n, point -> Point(n, point.y).takeIf { instruction.type == "x" } ?: Point(point.x, n) }
 
         val max = points.maxOf { targetCoordinate(it) }
         val newPoints = points.filter { targetCoordinate(it) < instruction.coordinate }
