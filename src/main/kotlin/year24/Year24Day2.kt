@@ -27,14 +27,13 @@ class Year24Day2 : Day<List<String>>(::toLines) {
             .toMutableSet()
 
         val signs = listOfPairs.map { (a, b) -> direction(a, b) }
-        val signGroups = signs.groupBy { it }.filterNot { it.key == 0 }
+        val signGroups = signs.filterNot { it == 0 }.groupBy { it }
         if (signGroups.size > 1) {
-            val anomalySign = signGroups.map { (k, v) -> k to v.size }
-                .let { groups -> groups.first { it.second == groups.minOf { group -> group.second } }.first }
+            val anomalySign = signGroups.minBy { it.value.size }.key
 
             signs.mapIndexedNotNull { index, sign -> index.takeIf { sign == anomalySign } }
                 .toSet()
-                .apply { anomalyPairIndices.addAll(this) }
+                .apply { anomalyPairIndices += this }
         }
 
         return anomalyPairIndices.flatMap {
