@@ -7,10 +7,9 @@ import kotlin.math.abs
 class Year24Day1 : Day<List<String>>(::toLines) {
 
     override fun part1(input: List<String>): Int = inputToListOfIntLists(input).let { lists ->
-        val firstList = lists.first().sorted()
-        val secondList = lists.last().sorted()
-
-        firstList.mapIndexed { index, i -> abs(i - secondList[index]) }.sum()
+        lists.first().sorted()
+            .zip(lists.last().sorted())
+            .sumOf { (first, second) -> abs(first - second) }
     }
 
     override fun part2(input: List<String>): Int = inputToListOfIntLists(input).let { lists ->
@@ -18,8 +17,8 @@ class Year24Day1 : Day<List<String>>(::toLines) {
     }
 
     private fun inputToListOfIntLists(input: List<String>): List<List<Int>> =
-        input.map { s -> s.split(" ").filter { it.isNotBlank() } }
-            .map { list -> list.map { it.toInt() } }
+        input.map { s -> s.split(" ") }
+            .map { list -> list.mapNotNull { it.toIntOrNull() } }
             .let { lists ->
                 listOf(
                     lists.map { it.first() },
