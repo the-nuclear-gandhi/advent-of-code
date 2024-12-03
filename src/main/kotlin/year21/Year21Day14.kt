@@ -37,6 +37,7 @@ class Year21Day14 : Day<List<String>>(::toLines) {
             .apply {
                 this.computeIfPresent(template.last()) { _, v -> v + 1 }
             }
+            .toMap()
 
         return letterCounts.maxOf { it.value } - letterCounts.minOf { it.value }
     }
