@@ -31,7 +31,7 @@ class Year15Day23 : Day<List<String>>(::toLines) {
             }
 
     private fun getConditionalOffset(
-        registers: MutableMap<String, Long>,
+        registers: Map<String, Long>,
         address: String,
         condition: (Long) -> Boolean
     ): Int {
