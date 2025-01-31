@@ -17,6 +17,10 @@ private val defaultInput = """
 
 class Year20Day11Test : DayTest<List<String>, Int, Int>(
     Year20Day11::class.java,
-    listOf(defaultInput to 37),
-    listOf(defaultInput to 26)
+    listOf(
+        defaultInput to 37
+    ),
+    listOf(
+        defaultInput to 26
+    )
 )

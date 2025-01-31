@@ -7,6 +7,10 @@ private const val secondInput = "xmul(2,4)&mul[3,7]!^don't()_mul(5,5)+mul(32,64]
 
 class Year24Day3Test : DayTest<String, Int, Int>(
     Year24Day3::class.java,
-    listOf(defaultInput to 161),
-    listOf(secondInput to 48),
+    listOf(
+        defaultInput to 161
+    ),
+    listOf(
+        secondInput to 48
+    ),
 )

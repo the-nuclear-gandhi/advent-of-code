@@ -26,7 +26,9 @@ private val secondInput = """
 
 class Year20Day7Test : DayTest<List<String>, Int, Int>(
     Year20Day7::class.java,
-    listOf(defaultInput to 4),
+    listOf(
+        defaultInput to 4
+    ),
     listOf(
         defaultInput to 32,
         secondInput to 126

@@ -5,8 +5,12 @@ import shared.LineBlock
 
 class Year24Day5Test : DayTest<List<LineBlock>, Int, Int>(
     Year24Day5::class.java,
-    listOf(defaultInput to 143),
-    listOf(defaultInput to 123)
+    listOf(
+        defaultInput to 143
+    ),
+    listOf(
+        defaultInput to 123
+    )
 )
 
 private val defaultInput = """

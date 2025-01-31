@@ -44,6 +44,10 @@ private val largerInput = """
 
 class Year20Day4Test : DayTest<List<LineBlock>, Int, Int>(
     Year20Day4::class.java,
-    listOf(defaultInput to 2),
-    listOf(largerInput to 3)
+    listOf(
+        defaultInput to 2
+    ),
+    listOf(
+        largerInput to 3
+    )
 )
