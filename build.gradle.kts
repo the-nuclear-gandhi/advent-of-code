@@ -11,8 +11,8 @@ repositories {
 version = "1.0"
 
 dependencies {
-    implementation("com.github.ajalt.clikt:clikt:5.0.2")
-    implementation("ch.qos.logback:logback-classic:1.5.16")
+    implementation("com.github.ajalt.clikt:clikt:5.0.3")
+    implementation("ch.qos.logback:logback-classic:1.5.17")
 
     testImplementation(platform("org.junit:junit-bom:5.12.0"))
     testImplementation("org.junit.jupiter:junit-jupiter")
