@@ -2,6 +2,7 @@ package year15
 
 import core.Day
 import core.InputConverter.Companion.noOp
+import shared.Direction
 import shared.Point
 
 class Year15Day3 : Day<String>(::noOp) {
@@ -10,8 +11,8 @@ class Year15Day3 : Day<String>(::noOp) {
         var santaLocation = Point(0, 0)
         val visitedPoints = mutableSetOf(santaLocation)
 
-        input.forEach {
-            santaLocation = nextPoint(santaLocation, it)
+        input.map(Direction::of).forEach {
+            santaLocation = santaLocation.nextInDirection(it)
             visitedPoints += santaLocation
         }
 
@@ -23,24 +24,16 @@ class Year15Day3 : Day<String>(::noOp) {
         val visitedPoints = mutableSetOf(santaLocation)
         var robotSantaLocation = santaLocation
 
-        input.forEachIndexed { index, c ->
+        input.map(Direction::of).forEachIndexed { index, direction ->
             if (index % 2 == 0) {
-                santaLocation = nextPoint(santaLocation, c)
+                santaLocation = santaLocation.nextInDirection(direction)
                 visitedPoints += santaLocation
             } else {
-                robotSantaLocation = nextPoint(robotSantaLocation, c)
+                robotSantaLocation = robotSantaLocation.nextInDirection(direction)
                 visitedPoints += robotSantaLocation
             }
         }
 
         return visitedPoints.size
-    }
-
-    private fun nextPoint(point: Point, direction: Char): Point = when (direction) {
-        '>' -> Point(point.x + 1, point.y)
-        'v' -> Point(point.x, point.y - 1)
-        '<' -> Point(point.x - 1, point.y)
-        '^' -> Point(point.x, point.y + 1)
-        else -> point
     }
 }

@@ -2,6 +2,8 @@ package year23
 
 import core.Day
 import core.InputConverter.Companion.toLines
+import shared.Direction
+import shared.Direction.*
 import shared.Point
 import shared.PointRange
 import kotlin.math.absoluteValue
@@ -9,7 +11,7 @@ import kotlin.math.absoluteValue
 class Year23Day18 : Day<List<String>>(::toLines) {
 
     override fun part1(input: List<String>): Long = input.map { it.split(" ") }
-        .map { Instruction(it[0], it[1].toInt()) }
+        .map { Instruction(Direction.of(it[0].first()), it[1].toInt()) }
         .let { solve(it) }
 
     private fun solve(instructions: List<Instruction>): Long {
@@ -25,10 +27,10 @@ class Year23Day18 : Day<List<String>>(::toLines) {
         .map {
             val distance = it.drop(2).take(5).toInt(16)
             val instruction = when (it.dropLast(1).last().digitToInt()) {
-                0 -> "R"
-                1 -> "D"
-                2 -> "L"
-                3 -> "U"
+                0 -> RIGHT
+                1 -> DOWN
+                2 -> LEFT
+                3 -> UP
                 else -> throw RuntimeException("Unsupported operation")
             }
 
@@ -36,13 +38,12 @@ class Year23Day18 : Day<List<String>>(::toLines) {
         }
         .let { solve(it) }
 
-    private data class Instruction(val direction: String, val length: Int) {
+    private data class Instruction(val direction: Direction, val length: Int) {
         fun toPointRange(start: Point): PointRange = when (direction) {
-            "R" -> Point(start.x, start.y + length)
-            "D" -> Point(start.x + length, start.y)
-            "L" -> Point(start.x, start.y - length)
-            "U" -> Point(start.x - length, start.y)
-            else -> throw RuntimeException("Unsupported operation")
+            RIGHT -> Point(start.x, start.y + length)
+            DOWN -> Point(start.x + length, start.y)
+            LEFT -> Point(start.x, start.y - length)
+            UP -> Point(start.x - length, start.y)
         }.run {
             PointRange(start, this)
         }

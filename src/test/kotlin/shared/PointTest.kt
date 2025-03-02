@@ -72,4 +72,28 @@ class PointTest {
         }
     }
 
+    @Nested
+    inner class TestNextInDirection {
+
+        @Test
+        fun `produces valid horizontal next points`() {
+            val point = Point(1, 1)
+            val nextPointRight = point.nextInDirection(Direction.RIGHT)
+            assertEquals(Point(1, 2), nextPointRight)
+
+            val nextPointLeft = point.nextInDirection(Direction.LEFT)
+            assertEquals(Point(1, 0), nextPointLeft)
+        }
+
+        @Test
+        fun `produces valid vertical next points`() {
+            val point = Point(1, 1)
+            val nextPointUp = point.nextInDirection(Direction.UP)
+            assertEquals(Point(0, 1), nextPointUp)
+
+            val nextPointDown = point.nextInDirection(Direction.DOWN)
+            assertEquals(Point(2, 1), nextPointDown)
+        }
+    }
+
 }

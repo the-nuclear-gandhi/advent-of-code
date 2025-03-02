@@ -2,6 +2,8 @@ package year20
 
 import core.Day
 import core.InputConverter.Companion.toLines
+import shared.Direction
+import shared.Direction.*
 import shared.Point
 import kotlin.math.abs
 
@@ -9,12 +11,12 @@ class Year20Day12 : Day<List<String>>(::toLines) {
 
     override fun part1(input: List<String>): Int {
         var position = Point(0, 0)
-        var direction = 'E'
-        val directions = listOf('E', 'S', 'W', 'N')
+        var direction = RIGHT
+        val directions = Direction.entries
 
         inputToInstructions(input).forEach { (command, value) ->
             when (command) {
-                'N', 'S', 'E', 'W' -> position = move(position, command, value)
+                'N', 'S', 'E', 'W' -> position = move(position, Direction.of(command), value)
                 'F' -> position = move(position, direction, value)
                 'R' -> {
                     val index = (directions.indexOf(direction) + value / 90) % directions.size
@@ -34,12 +36,11 @@ class Year20Day12 : Day<List<String>>(::toLines) {
     private fun inputToInstructions(input: List<String>): List<Pair<Char, Int>> =
         input.map { it[0] to it.substring(1).toInt() }
 
-    private fun move(position: Point, direction: Char, distance: Int): Point = when (direction) {
-        'N' -> position.copy(y = position.y + distance)
-        'S' -> position.copy(y = position.y - distance)
-        'E' -> position.copy(x = position.x + distance)
-        'W' -> position.copy(x = position.x - distance)
-        else -> position
+    private fun move(position: Point, direction: Direction, distance: Int): Point = when (direction) {
+        UP -> position.copy(y = position.y + distance)
+        DOWN -> position.copy(y = position.y - distance)
+        RIGHT -> position.copy(x = position.x + distance)
+        LEFT -> position.copy(x = position.x - distance)
     }
 
     override fun part2(input: List<String>): Int {
@@ -48,7 +49,7 @@ class Year20Day12 : Day<List<String>>(::toLines) {
 
         inputToInstructions(input).forEach { (command, value) ->
             when (command) {
-                'N', 'S', 'E', 'W' -> waypointPosition = move(waypointPosition, command, value)
+                'N', 'S', 'E', 'W' -> waypointPosition = move(waypointPosition, Direction.of(command), value)
                 'F' -> position =
                     Point(position.x + waypointPosition.x * value, position.y + waypointPosition.y * value)
 

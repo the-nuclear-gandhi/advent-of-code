@@ -1,5 +1,7 @@
 package shared
 
+import shared.Direction.*
+
 data class Point(val x: Int, val y: Int) {
 
     companion object {
@@ -23,5 +25,21 @@ data class Point(val x: Int, val y: Int) {
                 }
             }
         }
+    }
+
+    fun nextInDirection(direction: Direction): Point {
+        val xInc = when (direction) {
+            UP -> -1
+            DOWN -> 1
+            else -> 0
+        }
+
+        val yInc = when (direction) {
+            LEFT -> -1
+            RIGHT -> 1
+            else -> 0
+        }
+
+        return Point(this.x + xInc, this.y + yInc)
     }
 }
