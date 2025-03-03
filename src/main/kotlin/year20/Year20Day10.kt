@@ -17,7 +17,7 @@ class Year20Day10 : Day<List<Int>>(::toInts) {
 
     override fun part2(input: List<Int>): Long {
         val max = input.max()
-        val counts = Array(max + 4) { 0L }
+        val counts = LongArray(max + 4)
         counts[0] = 1
 
         input.toMutableList().apply { this += max + 3 }

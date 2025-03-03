@@ -16,7 +16,7 @@ class Year15Day20 : Day<Int>(::prepareInput) {
         input: Int,
         distributionBoundaryFunction: (Int, Int) -> Boolean,
         distributionAmountFunction: (Int) -> Int
-    ) = with(IntArray(1000000) { 0 }) {
+    ) = with(IntArray(1000000)) {
         for (i in 1 until this.size) {
             var j = i
             while (distributionBoundaryFunction(j, i) && j in this.indices) {

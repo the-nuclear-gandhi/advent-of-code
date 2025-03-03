@@ -8,7 +8,7 @@ class Year15Day17(private val target: Int = 150) : Day<List<Int>>(::toInts) {
     override fun part1(input: List<Int>): Int = (1..input.size).sumOf {
         combinations(
             input,
-            IntArray(it) { 0 },
+            IntArray(it),
             0,
             input.size - 1,
             0,
@@ -19,7 +19,7 @@ class Year15Day17(private val target: Int = 150) : Day<List<Int>>(::toInts) {
     override fun part2(input: List<Int>): Int = (1..input.size).map {
         combinations(
             input,
-            IntArray(it) { 0 },
+            IntArray(it),
             0,
             input.size - 1,
             0,

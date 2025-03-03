@@ -12,9 +12,9 @@ class Year15Day6 : Day<List<String>>(::toLines) {
             .count { it }
 
     override fun part2(input: List<String>): Long =
-        calculate(input, Array(1000) { Array(1000) { 0 } }, ::transformPart2)
+        calculate(input, Array(1000) { Array(1000) { 0L } }, ::transformPart2)
             .flatten()
-            .sumOf { it.toLong() }
+            .sumOf { it }
 
     private fun <T> calculate(input: List<String>, map: Array<Array<T>>, transform: (String, T) -> T): Array<Array<T>> =
         map.apply {
@@ -39,7 +39,7 @@ class Year15Day6 : Day<List<String>>(::toLines) {
         else -> item
     }
 
-    private fun transformPart2(command: String, item: Int): Int = when {
+    private fun transformPart2(command: String, item: Long): Long = when {
         command.startsWith("toggle") -> item + 2
         command.startsWith("turn on") -> item + 1
         command.startsWith("turn off") -> if (item > 0) {

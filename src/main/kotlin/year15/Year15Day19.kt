@@ -7,14 +7,13 @@ class Year15Day19 : Day<List<String>>(::toLines) {
 
     override fun part1(input: List<String>): Int = Pair(input.last(), input.dropLast(1)).let { (molecule, rules) ->
         rules.map { it.split(" ").let { tokens -> tokens.first() to tokens.last() } }
-            .map { (sequence, replacement) ->
+            .flatMap { (sequence, replacement) ->
                 molecule.windowed(sequence.length)
                     .mapIndexedNotNull { index, s ->
                         s.takeIf { it == sequence }
                             ?.let { molecule.replaceRange(index, index + it.length, replacement) }
                     }
             }
-            .flatten()
             .distinct()
             .size
     }

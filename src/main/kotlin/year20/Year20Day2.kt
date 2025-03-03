@@ -2,6 +2,7 @@ package year20
 
 import core.Day
 import core.InputConverter.Companion.toLines
+import shared.toIntList
 
 class Year20Day2 : Day<List<String>>(::toLines) {
 
@@ -15,7 +16,7 @@ class Year20Day2 : Day<List<String>>(::toLines) {
         companion object {
             fun fromString(s: String): PasswordPolicy = s.split(" ")
                 .let { (entries, letter, password) ->
-                    val times = entries.split("-").map { it.toInt() }
+                    val times = entries.toIntList("-")
                     PasswordPolicy(times[0]..times.last(), letter[0], password)
                 }
         }

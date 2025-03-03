@@ -11,7 +11,7 @@ data class PointRange(val start: Point, val end: Point) {
 
         val xIncline = end.x - start.x
         val yIncline = end.y - start.y
-        mutableListOf<Point>().apply {
+        buildList {
             while (x != end.x || y != end.y) {
                 this += Point(x, y)
                 x += 1 * xIncline.sign
@@ -19,7 +19,7 @@ data class PointRange(val start: Point, val end: Point) {
             }
 
             this += end
-        }.toList()
+        }
     }
 
     val size: Int by lazy {

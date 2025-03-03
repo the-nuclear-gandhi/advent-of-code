@@ -19,7 +19,7 @@ class Year21Day5 : Day<List<String>>(::toLines) {
         val maxCoordinate = pipelines.flatMap { listOf(it.start.x, it.start.y, it.end.x, it.end.y) }
             .maxOrNull() ?: 9999
 
-        val oceanFloor = Array(maxCoordinate + 1) { IntArray(maxCoordinate + 1) { 0 } }
+        val oceanFloor = Array(maxCoordinate + 1) { IntArray(maxCoordinate + 1) }
 
         pipelines.filter { pipelineFilter?.test(it) ?: true }
             .flatMap { it.values }

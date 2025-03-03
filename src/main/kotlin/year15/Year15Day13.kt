@@ -13,16 +13,15 @@ class Year15Day13 : Day<List<String>>(::toLines) {
     private fun criterion(collection: Collection<Int>): Int = collection.maxOrNull() ?: 0
 
     private fun distanceMap(input: List<String>, vararg additionalPeople: String): Array<IntArray> {
-        val people = input.map {
+        val people = input.flatMap {
             it.split(" ").let { tokens -> listOf(tokens[0], tokens.last().removeSuffix(".")) }
         }
-            .flatten()
             .distinct()
             .toMutableList()
 
         people.addAll(additionalPeople)
 
-        val distanceMap = Array(people.size) { IntArray(people.size) { 0 } }
+        val distanceMap = Array(people.size) { IntArray(people.size) }
         input.map {
             it.split(" ").let { tokens -> listOf(tokens[0], tokens[2], tokens[3], tokens.last().removeSuffix(".")) }
         }
