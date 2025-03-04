@@ -7,7 +7,7 @@ import java.io.IOException
 import java.nio.file.Files
 import java.nio.file.Path
 
-class AdventOfCodeRunner(private val year: Int, private val day: Int, private val inputPath: Path) {
+class AdventOfCodeRunner(private val year: Int, private val day: Int, private val inputPath: Path?) {
     private val log: Logger = LoggerFactory.getLogger(javaClass.simpleName)
 
     private companion object {
@@ -15,8 +15,10 @@ class AdventOfCodeRunner(private val year: Int, private val day: Int, private va
         private const val solving = "Solving the Advent of Code puzzle for year {}, day {}"
         private const val loadedSolutionClass = "Loaded solution class"
         private const val usingInput = "Using input file at {}"
+        private const val noExternalInput = "External input not provided, using input from classpath"
 
-        private const val errorClassNotFound = "Solution class for year {}, day {} not found, please try another problem"
+        private const val errorClassNotFound =
+            "Solution class for year {}, day {} not found, please try another problem"
         private const val errorCouldNotLoadInput = "Could not load program input: {}"
     }
 
@@ -24,7 +26,7 @@ class AdventOfCodeRunner(private val year: Int, private val day: Int, private va
         log.info(welcome)
         log.info(solving, year, day)
 
-        val solutionClass = loadSolutionClass(year, day)
+        val solutionClass = loadSolutionClass()
         val solution = solutionClass.getDeclaredConstructor().newInstance() as Day<*>
         val input = loadInput(inputPath)
 
@@ -41,13 +43,18 @@ class AdventOfCodeRunner(private val year: Int, private val day: Int, private va
         }
     }
 
-    private fun loadSolutionClass(year: Int, day: Int): Class<*> = (year % 2000).let {
+    private fun loadSolutionClass(): Class<*> = (year % 2000).let {
         val solutionClass = Class.forName("year${it}.Year${it}Day${day}")
         require(Day::class.java.isAssignableFrom(solutionClass)) { "Solution class not assignable to Day" }
         solutionClass
     }.also { log.info(loadedSolutionClass) }
 
-    private fun loadInput(inputPath: Path): String = Files.readString(inputPath)
-        .also { log.info(usingInput, inputPath) }
+    private fun loadInput(inputPath: Path?): String = if (inputPath != null) {
+        Files.readString(inputPath).also { log.info(usingInput, inputPath) }
+    } else {
+        log.info(noExternalInput)
+        javaClass.classLoader.getResource("year${year % 2000}/day${day}.txt")?.readText()
+            ?: throw IOException("Input for year $year, day $day not found on the classpath")
+    }
 
 }
