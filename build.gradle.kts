@@ -1,6 +1,6 @@
 plugins {
-    kotlin("jvm") version "2.1.10"
-    id("org.sonarqube") version "6.0.1.5171"
+    kotlin("jvm") version "2.1.20"
+    id("org.sonarqube") version "6.1.0.5360"
     jacoco
 }
 
@@ -12,9 +12,9 @@ version = "1.0"
 
 dependencies {
     implementation("com.github.ajalt.clikt:clikt:5.0.3")
-    implementation("ch.qos.logback:logback-classic:1.5.17")
+    implementation("ch.qos.logback:logback-classic:1.5.18")
 
-    testImplementation(platform("org.junit:junit-bom:5.12.0"))
+    testImplementation(platform("org.junit:junit-bom:5.12.1"))
     testImplementation("org.junit.jupiter:junit-jupiter")
 
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
