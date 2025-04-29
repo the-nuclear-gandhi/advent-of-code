@@ -14,7 +14,7 @@ dependencies {
     implementation("com.github.ajalt.clikt:clikt:5.0.3")
     implementation("ch.qos.logback:logback-classic:1.5.18")
 
-    testImplementation(platform("org.junit:junit-bom:5.12.1"))
+    testImplementation(platform("org.junit:junit-bom:5.12.2"))
     testImplementation("org.junit.jupiter:junit-jupiter")
 
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
@@ -29,7 +29,7 @@ sonar {
 }
 
 jacoco {
-    toolVersion = "0.8.12"
+    toolVersion = "0.8.13"
 }
 
 tasks.test {
