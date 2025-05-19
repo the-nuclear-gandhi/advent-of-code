@@ -101,4 +101,14 @@ class ExtensionTest {
             assertTrue("".toLongList().isEmpty())
         }
     }
+
+    @Nested
+    inner class TestMD5Encode {
+
+        @Test
+        fun `should produce a valid MD5 hash`() {
+            val s = "The quick brown fox jumps over the lazy dog"
+            assertEquals("9e107d9d372bb6826bd81d3542a419d6", s.md5Encode())
+        }
+    }
 }

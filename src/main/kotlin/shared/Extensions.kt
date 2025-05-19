@@ -1,5 +1,8 @@
 package shared
 
+import java.security.MessageDigest
+import kotlin.text.Charsets.UTF_8
+
 /**
  * Splits a string on empty lines and returns all resulting non-empty blocks which in turn can be split into lines.
  */
@@ -20,3 +23,6 @@ private inline fun <reified T : Number> String.toList(separator: String = " "): 
             else -> throw RuntimeException("Unsupported type parameter")
         }
     }
+
+fun String.md5Encode(): String = MessageDigest.getInstance("MD5").digest(this.toByteArray(UTF_8))
+    .joinToString("") { "%02x".format(it) }

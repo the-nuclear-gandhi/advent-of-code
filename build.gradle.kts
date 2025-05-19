@@ -11,6 +11,7 @@ repositories {
 version = "1.0"
 
 dependencies {
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.10.2")
     implementation("com.github.ajalt.clikt:clikt:5.0.3")
     implementation("ch.qos.logback:logback-classic:1.5.18")
 
@@ -33,6 +34,7 @@ jacoco {
 }
 
 tasks.test {
+    jvmArgs("-Xmx4G")
     useJUnitPlatform()
     finalizedBy(tasks.jacocoTestReport)
 }

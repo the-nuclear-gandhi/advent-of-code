@@ -2,46 +2,50 @@ package year16
 
 import core.Day
 import core.InputConverter.Companion.trimming
-import java.security.MessageDigest
-import kotlin.text.Charsets.UTF_8
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
+import kotlinx.coroutines.awaitAll
+import kotlinx.coroutines.runBlocking
+import shared.md5Encode
+import java.util.*
+import java.util.concurrent.LinkedBlockingQueue
 
-class Year16Day5 : Day<String>(::trimming) {
+class Year16Day5(private val parallelThreads: Int = 8, private val max: Int = 30_000_000) : Day<String>(::trimming) {
 
-    override fun part1(input: String): String {
-        var password = ""
-        var i = 0
-        while (password.length < 8) {
-            val hash = md5("$input$i").toHex()
-            if (hash.startsWith("00000")) {
-                password += hash[5]
-            }
-            i++
-        }
+    override fun part1(input: String): String = calculateResults(input) { it.startsWith("00000") }
+        .take(8)
+        .map { it.hash[5] }
+        .joinToString("")
 
-        return password
+    override fun part2(input: String): String = calculateResults(input) {
+        it.startsWith("00000") && it[5].isDigit() && it[5].digitToInt() < 8
     }
+        .asSequence()
+        .distinctBy { it.hash[5] }
+        .sortedBy { it.hash[5].digitToInt() }
+        .take(8)
+        .map { it.hash[6] }
+        .joinToString("")
 
-    override fun part2(input: String): String {
-        val password = CharArray(8) { ' ' }
-        var i = 0
-        var foundChars = 0
+    private fun calculateResults(input: String, filter: (String) -> Boolean): List<Result> {
+        val queue: Queue<Result> = LinkedBlockingQueue(20)
+        val numbers = 0..max
 
-        while (foundChars < password.size) {
-            val hash = md5("$input$i").toHex()
-            if (hash.startsWith("00000") && hash[5].isDigit() && hash[5].digitToInt() < password.size) {
-                val index = hash[5].digitToInt()
-                if (!password[index].isLetterOrDigit()) {
-                    password[index] = hash[6]
-                    foundChars++
+        runBlocking {
+            numbers.chunked(max / parallelThreads).map { list ->
+                async(Dispatchers.Default) {
+                    for (i in list) {
+                        val pair = i to "$input$i".md5Encode()
+                        if (filter(pair.second)) {
+                            queue += Result(pair.first, pair.second)
+                        }
+                    }
                 }
-            }
-
-            i++
+            }.awaitAll()
         }
 
-        return password.joinToString("")
+        return queue.sortedBy { it.i }
     }
 
-    private fun md5(str: String): ByteArray = MessageDigest.getInstance("MD5").digest(str.toByteArray(UTF_8))
-    private fun ByteArray.toHex() = joinToString("") { "%02x".format(it) }
+    private data class Result(val i: Int, val hash: String)
 }
