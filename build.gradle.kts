@@ -8,6 +8,10 @@ repositories {
     mavenCentral()
 }
 
+kotlin {
+    jvmToolchain(24)
+}
+
 version = "1.0"
 
 dependencies {
