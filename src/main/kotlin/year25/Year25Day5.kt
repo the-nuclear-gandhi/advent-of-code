@@ -24,10 +24,8 @@ class Year25Day5 : Day<List<LineBlock>>(::toLineBlocks) {
                 if (ranges.none { range.first in it || range.last in it }) {
                     ranges += range
                 } else if (ranges.none { range in it }) {
-                    val newStart = ranges.filter { range.first in it && range.last !in it }
-                        .maxOfOrNull { it.last }?.inc() ?: range.first
-                    val newEnd = ranges.filter { range.last in it && range.first !in it }
-                        .minOfOrNull { it.first }?.dec() ?: range.last
+                    val newStart = ranges.filter { range.first in it }.maxOfOrNull { it.last }?.inc() ?: range.first
+                    val newEnd = ranges.filter { range.last in it }.minOfOrNull { it.first }?.dec() ?: range.last
 
                     ranges += LongRange(newStart, newEnd)
                 }
