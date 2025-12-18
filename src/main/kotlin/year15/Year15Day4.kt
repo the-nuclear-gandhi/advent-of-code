@@ -2,34 +2,31 @@ package year15
 
 import core.Day
 import core.InputConverter.Companion.trimming
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.async
-import kotlinx.coroutines.awaitAll
-import kotlinx.coroutines.runBlocking
-import shared.md5Encode
-import java.util.Queue
-import java.util.concurrent.LinkedBlockingQueue
+import shared.md5
+import kotlin.experimental.and
 
-class Year15Day4(private val parallelThreads: Int = 8, private val max: Int = 10_000_000) : Day<String>(::trimming) {
+class Year15Day4 : Day<String>(::trimming) {
 
-    override fun part1(input: String): Int = findHexByPrefix(input, "00000")
-    override fun part2(input: String): Int = findHexByPrefix(input, "000000")
+    override fun part1(input: String): Int = findHexByPrefix(input) {
+        it.take(2).all { byte -> byte == 0.toByte() } && it[2] and 0xf0.toByte() == 0.toByte()
+    }
+    override fun part2(input: String): Int = findHexByPrefix(input) {
+        it.take(3).all { byte -> byte == 0.toByte() }
+    }
 
-    private fun findHexByPrefix(s: String, prefix: String): Int {
-        val results: Queue<Int> = LinkedBlockingQueue(20)
+    private fun findHexByPrefix(s: String, numberSearchFunction: (ByteArray) -> Boolean): Int {
+        var answer = 0
+        var number = 0
 
-        runBlocking {
-            (0..max).chunked(max / parallelThreads).map { list ->
-                async(Dispatchers.Default) {
-                    for (i in list) {
-                        if ("$s$i".md5Encode().startsWith(prefix)) {
-                            results += i
-                        }
-                    }
-                }
-            }.awaitAll()
+        while (answer == 0) {
+            val md5 = "$s$number".md5()
+            if (numberSearchFunction(md5)) {
+                answer = number
+            }
+
+            number++
         }
 
-        return results.minOf { it }
+        return answer
     }
 }

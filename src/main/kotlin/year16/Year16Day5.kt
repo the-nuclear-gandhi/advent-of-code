@@ -2,50 +2,50 @@ package year16
 
 import core.Day
 import core.InputConverter.Companion.trimming
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.async
-import kotlinx.coroutines.awaitAll
-import kotlinx.coroutines.runBlocking
-import shared.md5Encode
-import java.util.*
-import java.util.concurrent.LinkedBlockingQueue
+import shared.md5
+import kotlin.experimental.and
 
-class Year16Day5(private val parallelThreads: Int = 8, private val max: Int = 30_000_000) : Day<String>(::trimming) {
+class Year16Day5 : Day<String>(::trimming) {
 
-    override fun part1(input: String): String = calculateResults(input) { it.startsWith("00000") }
-        .take(8)
-        .map { it.hash[5] }
-        .joinToString("")
-
-    override fun part2(input: String): String = calculateResults(input) {
-        it.startsWith("00000") && it[5].isDigit() && it[5].digitToInt() < 8
+    override fun part1(input: String): String {
+        val generator = MD5Generator(input)
+        var result = ""
+        while (result.length < 8) {
+            val md5 = generator.next()
+            result += md5[2].toHexString()[1]
+        }
+        return result
     }
-        .asSequence()
-        .distinctBy { it.hash[5] }
-        .sortedBy { it.hash[5].digitToInt() }
-        .take(8)
-        .map { it.hash[6] }
-        .joinToString("")
 
-    private fun calculateResults(input: String, filter: (String) -> Boolean): List<Result> {
-        val queue: Queue<Result> = LinkedBlockingQueue(20)
-        val numbers = 0..max
+    override fun part2(input: String): String {
+        val generator = MD5Generator(input)
+        val result = CharArray(8)
+        val foundChars = BooleanArray(8) { false }
 
-        runBlocking {
-            numbers.chunked(max / parallelThreads).map { list ->
-                async(Dispatchers.Default) {
-                    for (i in list) {
-                        val pair = i to "$input$i".md5Encode()
-                        if (filter(pair.second)) {
-                            queue += Result(pair.first, pair.second)
-                        }
-                    }
-                }
-            }.awaitAll()
+        while (foundChars.any { !it }) {
+            val md5 = generator.next()
+            val position = (md5[2] and 0x0f.toByte()).toInt()
+            if (position < 8 && !foundChars[position]) {
+                result[position] = md5[3].toHexString()[0]
+                foundChars[position] = true
+            }
         }
 
-        return queue.sortedBy { it.i }
+        return result.joinToString("")
     }
 
-    private data class Result(val i: Int, val hash: String)
+    private class MD5Generator(val salt: String) {
+
+        private var i = 0
+
+        fun next(): ByteArray {
+            while (true) {
+                val md5 = "$salt$i".md5()
+                i++
+                if (md5[0] and 0xff.toByte() == 0.toByte() && md5[1] and 0xff.toByte() == 0.toByte() && md5[2] and 0xf0.toByte() == 0.toByte()) {
+                    return md5
+                }
+            }
+        }
+    }
 }

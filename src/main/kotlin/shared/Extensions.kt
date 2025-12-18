@@ -24,5 +24,4 @@ private inline fun <reified T : Number> String.toList(separator: String = " "): 
         }
     }
 
-fun String.md5Encode(): String = MessageDigest.getInstance("MD5").digest(this.toByteArray(UTF_8))
-    .joinToString("") { "%02x".format(it) }
+fun String.md5(): ByteArray = MessageDigest.getInstance("MD5").digest(toByteArray(UTF_8))
