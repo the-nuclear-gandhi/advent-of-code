@@ -9,7 +9,7 @@ repositories {
 }
 
 kotlin {
-    jvmToolchain(24)
+    jvmToolchain(25)
 }
 
 version = "1.0"
