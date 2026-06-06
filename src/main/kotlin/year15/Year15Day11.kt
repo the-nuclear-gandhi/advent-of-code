@@ -25,7 +25,7 @@ class Year15Day11 : Day<String>(::trimming) {
 
         chars.indices
             .filter { incrementPositions.contains(it) }
-            .map { chars[it] = 'a' + (chars[it] + 1 - 'a') % ('z' - 'a' + 1) }
+            .forEach { chars[it] = 'a' + (chars[it] + 1 - 'a') % ('z' - 'a' + 1) }
 
         return chars
     }

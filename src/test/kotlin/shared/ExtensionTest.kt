@@ -61,7 +61,7 @@ class ExtensionTest {
         fun `should return a list of 5 numbers`(s: String) {
             val list = s.toIntList()
             assertEquals(5, list.size)
-            (1..5).map { assertTrue(it in list) }
+            (1..5).forEach { assertTrue(it in list) }
         }
 
         @ParameterizedTest
@@ -69,7 +69,7 @@ class ExtensionTest {
         fun `should return a list of 3 numbers parsed with a different separator`(s: String) {
             val list = s.toIntList(",")
             assertEquals(3, list.size)
-            (1..3).map { assertTrue(it in list) }
+            (1..3).forEach { assertTrue(it in list) }
         }
 
         @Test
@@ -85,7 +85,7 @@ class ExtensionTest {
         fun `should return a list of 5 numbers`(s: String) {
             val list = s.toLongList()
             assertEquals(5, list.size)
-            (1L..5L).map { assertTrue(it in list) }
+            (1L..5L).forEach { assertTrue(it in list) }
         }
 
         @ParameterizedTest
@@ -93,7 +93,7 @@ class ExtensionTest {
         fun `should return a list of 3 numbers parsed with a different separator`(s: String) {
             val list = s.toLongList(",")
             assertEquals(3, list.size)
-            (1L..3L).map { assertTrue(it in list) }
+            (1L..3L).forEach { assertTrue(it in list) }
         }
 
         @Test

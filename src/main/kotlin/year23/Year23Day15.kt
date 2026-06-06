@@ -11,7 +11,7 @@ class Year23Day15 : Day<String>(::noOp) {
 
     override fun part2(input: String): Int = mutableMapOf<Int, MutableList<String>>().let { boxes ->
         input.replace("\n", "").split(",")
-            .map {
+            .forEach {
                 val label = it.takeWhile { c -> c.isLowerCase() }
                 val box = hash(label)
                 val operation = it[label.length]

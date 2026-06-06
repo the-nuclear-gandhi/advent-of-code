@@ -12,6 +12,6 @@ class Year20Day6 : Day<List<LineBlock>>(::toLineBlocks) {
 
     override fun part2(input: List<LineBlock>): Int = input.sumOf { group ->
         group.flatMap { it.toList() }.toSet()
-            .count { group.filter { it.isNotBlank() }.all { s -> it in s } }
+            .count { group.filter(String::isNotBlank).all { s -> it in s } }
     }
 }

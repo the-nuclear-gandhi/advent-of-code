@@ -17,7 +17,7 @@ class Year22Day11 : Day<List<LineBlock>>(::toLineBlocks) {
     private fun calculateMonkeyBusiness(monkeys: List<Monkey>, rounds: Int, worryLevelModifier: (Long) -> Long): Long =
         repeat(rounds) {
             for (monkey in monkeys) {
-                monkey.inspect(worryLevelModifier).map { (id, item) -> monkeys[id].items += item }
+                monkey.inspect(worryLevelModifier).forEach { (id, item) -> monkeys[id].items += item }
             }
         }.let { monkeys.map { it.inspectedItemCount } }
             .sortedDescending()

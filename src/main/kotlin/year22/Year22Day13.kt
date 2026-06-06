@@ -96,10 +96,10 @@ class Year22Day13 : Day<List<LineBlock>>(::toLineBlocks) {
                 val leftItem = leftIterator.next()
                 val rightItem = rightIterator.next()
 
-                val result = when {
-                    leftItem is Int && rightItem is Int -> leftItem.compareTo(rightItem)
-                    leftItem !is List<*> && rightItem is List<*> -> compare(listOf(leftItem), rightItem as List<Any>)
-                    leftItem is List<*> && rightItem !is List<*> -> compare(leftItem as List<Any>, listOf(rightItem))
+                val result = when (leftItem) {
+                    is Int if rightItem is Int -> leftItem.compareTo(rightItem)
+                    !is List<*> if rightItem is List<*> -> compare(listOf(leftItem), rightItem as List<Any>)
+                    is List<*> if rightItem !is List<*> -> compare(leftItem as List<Any>, listOf(rightItem))
                     else -> compare(leftItem as List<Any>, rightItem as List<Any>)
                 }
 

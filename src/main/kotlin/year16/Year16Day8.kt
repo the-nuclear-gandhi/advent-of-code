@@ -44,8 +44,8 @@ class Year16Day8 : Day<List<String>>(::toLines) {
                             .toIntList("x")
                             .run { first() to last() }
 
-                        (0..<parameters.second).map { x ->
-                            (0..<parameters.first).map { y ->
+                        (0..<parameters.second).forEach { x ->
+                            (0..<parameters.first).forEach { y ->
                                 this[x][y] = true
                             }
                         }

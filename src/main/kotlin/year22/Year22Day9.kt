@@ -12,7 +12,7 @@ class Year22Day9 : Day<List<String>>(::toLines) {
 
     private fun solve(input: List<String>, knots: Int) = with(MutableList(knots) { Point(0, 0) }) {
         input.map { s -> s.split(" ").let { it[0] to it[1].toInt() } }
-            .map { (direction, distance) ->
+            .flatMap { (direction, distance) ->
                 val movementFunction: (Int) -> Int = when (direction) {
                     "R", "U" -> Int::inc
                     "L", "D" -> Int::dec
@@ -37,7 +37,6 @@ class Year22Day9 : Day<List<String>>(::toLines) {
 
                 visited
             }
-            .flatten()
             .toSet().size
     }
 
