@@ -13,7 +13,7 @@ class Year21Day10 : Day<List<String>>(::toLines) {
                 '}' -> 1197
                 '>' -> 25137
                 else -> 0
-            }.toInt()
+            }
         }
 
     override fun part2(input: List<String>): Long =
