@@ -17,7 +17,7 @@ version = "1.0"
 dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.11.0")
     implementation("com.github.ajalt.clikt:clikt:5.1.0")
-    implementation("ch.qos.logback:logback-classic:1.6.3")
+    implementation("ch.qos.logback:logback-classic:1.6.4")
 
     testImplementation(platform("org.junit:junit-bom:6.1.3"))
     testImplementation("org.junit.jupiter:junit-jupiter")
